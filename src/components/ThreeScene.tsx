@@ -1,19 +1,20 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float, Text, useTexture, Html } from '@react-three/drei';
-import { Mesh, Vector3 } from 'three';
+import { OrbitControls, Text, Float, Sphere, useTexture } from '@react-three/drei';
+import { Mesh, Vector3, MathUtils } from 'three';
 
 interface FloatingIconProps {
   position: [number, number, number];
   icon: string;
   color: string;
   speed?: number;
+  size?: number;
 }
 
-const FloatingIcon: React.FC<FloatingIconProps> = ({ position, icon, color, speed = 1 }) => {
+const FloatingIcon: React.FC<FloatingIconProps> = ({ position, icon, color, speed = 1, size = 0.8 }) => {
   const meshRef = useRef<Mesh>(null);
-  const initialPosition = new Vector3(...position);
+  const initialPosition = useMemo(() => new Vector3(...position), [position]);
   
   useFrame(({ clock }) => {
     if (meshRef.current) {
@@ -25,13 +26,52 @@ const FloatingIcon: React.FC<FloatingIconProps> = ({ position, icon, color, spee
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
       <mesh ref={meshRef} position={position}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color={color} />
-        <Html distanceFactor={8} position={[0, 0, 0.6]} transform>
-          <div className="text-2xl">{icon}</div>
-        </Html>
+        <sphereGeometry args={[size, 16, 16]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.2} />
+        <Text
+          position={[0, 0, size + 0.1]}
+          fontSize={size * 1.2}
+          color="white"
+          anchorX="center"
+          anchorY="middle"
+        >
+          {icon}
+        </Text>
       </mesh>
     </Float>
+  );
+};
+
+// Particles background
+const ParticleField = () => {
+  const particlesCount = 50;
+  const positions = useMemo(() => {
+    const positions = [];
+    for (let i = 0; i < particlesCount; i++) {
+      positions.push([
+        MathUtils.randFloatSpread(10),
+        MathUtils.randFloatSpread(10),
+        MathUtils.randFloatSpread(10)
+      ]);
+    }
+    return positions;
+  }, []);
+
+  return (
+    <>
+      {positions.map((position, i) => (
+        <mesh key={i} position={position as [number, number, number]}>
+          <sphereGeometry args={[0.05, 8, 8]} />
+          <meshStandardMaterial 
+            color={
+              ['#00CCFF', '#8B5CF6', '#0073F5'][Math.floor(i % 3)]
+            } 
+            emissive={['#00CCFF', '#8B5CF6', '#0073F5'][Math.floor(i % 3)]}
+            emissiveIntensity={0.5}
+          />
+        </mesh>
+      ))}
+    </>
   );
 };
 
@@ -41,27 +81,42 @@ interface SceneProps {
 
 const Scene: React.FC<SceneProps> = ({ className }) => {
   return (
-    <div className={`h-[500px] ${className}`}>
-      <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+    <div className={`h-[500px] w-full relative ${className}`}>
+      <Canvas 
+        camera={{ position: [0, 0, 8], fov: 50 }}
+        dpr={[1, 2]} // Responsive rendering
+        gl={{ antialias: true, alpha: true }}
+      >
+        <color attach="background" args={['transparent']} />
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1} />
-        <OrbitControls enableZoom={false} enablePan={false} />
+        <spotLight position={[0, 5, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
         
-        {/* Text */}
+        <OrbitControls 
+          enableZoom={false} 
+          enablePan={false}
+          rotateSpeed={0.5}
+          autoRotate
+          autoRotateSpeed={0.5}
+        />
+        
+        {/* Main Name Text */}
         <Float speed={1.5} rotationIntensity={0.3} floatIntensity={1}>
           <Text
             fontSize={1.2}
             color="#00CCFF"
             position={[0, 1, 0]}
-            font="/fonts/Inter-Bold.woff"
             maxWidth={10}
             textAlign="center"
+            font="/fonts/Inter-Bold.woff"
+            anchorX="center"
+            anchorY="middle"
           >
             VIGNA RAMTEJ
           </Text>
         </Float>
         
-        {/* Floating Tech Icons */}
+        {/* Tech Skill Icons */}
         <FloatingIcon position={[-3, 0, 0]} icon="⚛️" color="#61dafb" speed={1.2} />
         <FloatingIcon position={[3, 0, 0]} icon="🐍" color="#306998" speed={1.5} />
         <FloatingIcon position={[0, -2, 0]} icon="🐳" color="#0db7ed" speed={1.8} />
@@ -69,18 +124,7 @@ const Scene: React.FC<SceneProps> = ({ className }) => {
         <FloatingIcon position={[2, -1, 1]} icon="🦾" color="#ff6f00" speed={1.6} />
         
         {/* Background particles */}
-        {[...Array(30)].map((_, i) => (
-          <mesh key={i} position={[
-            Math.random() * 10 - 5,
-            Math.random() * 10 - 5,
-            Math.random() * 5 - 10
-          ]}>
-            <sphereGeometry args={[0.05, 8, 8]} />
-            <meshStandardMaterial color={
-              ['#00CCFF', '#8B5CF6', '#0073F5'][Math.floor(Math.random() * 3)]
-            } />
-          </mesh>
-        ))}
+        <ParticleField />
       </Canvas>
     </div>
   );

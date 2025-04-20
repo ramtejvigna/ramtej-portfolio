@@ -75,7 +75,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="hidden lg:block"
+          className="flex justify-center items-center"
         >
           <ThreeScene />
         </motion.div>
