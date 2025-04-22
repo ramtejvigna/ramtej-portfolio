@@ -1,6 +1,5 @@
 
 import { motion } from "framer-motion";
-import ThreeScene from "./ThreeScene";
 import { personalInfo, socialLinks } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Code } from "lucide-react";
@@ -27,7 +26,7 @@ const Hero = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
             Hi, I'm{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              {personalInfo.name.split(" ")[0]}
+              {personalInfo.name.split(" ")[0] + personalInfo.name.split(" ")[1]}
             </span>
           </h1>
           
@@ -75,9 +74,9 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex justify-center items-center"
+          className="flex justify-center items-center rounded-3xl m-10 shadow-lg overflow-hidden"
         >
-          <ThreeScene />
+          <img src="hero.png" alt="Vigna Ramtej" />
         </motion.div>
       </div>
       

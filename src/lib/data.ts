@@ -61,37 +61,39 @@ export const projects: Project[] = [
     title: "Code Quest",
     description: "A POTD platform for solving coding challenges, tracking streaks, and competing on a live leaderboard. Integrated real-time data fetching from coding platforms to update user progress dynamically. Designed an instant search functionality using Typesense for fast and accurate problem discovery and user profiles.",
     skills: ["Next.js", "TypeSense", "Real-time API"],
-    repoLink: "https://github.com/ramtejvigna/code-quest",
+    repoLink: "https://github.com/ramtejvigna/CODE-QUEST.git",
   },
   {
     title: "Code Battle Ground",
     description: "A competitive coding platform created utilizing Next.js for server-side rendering and user interactions. A strong backend using PostgreSQL (hosted on NeonDB). Containerized the application with Docker to provide uniform deployment environments. Enabled real-time code execution and leaderboard updates to enhance user engagement.",
     skills: ["Next.js", "PostgreSQL", "Docker", "NeonDB"],
-    repoLink: "https://github.com/ramtejvigna/code-battle-ground",
+    repoLink: "https://github.com/ramtejvigna/CodeBattleGround.git",
   },
   {
     title: "Vedic Baby Names - CRM",
     description: "Led the development of a CRM platform that produced customized baby name suggestions, deftly handling more than 200 client requests from the first inquiry to the last follow-up conversations. Controlled the whole development process, including front-end and back-end management, ensuring user identity was secure, and connecting WhatsApp via email to offer name options in PDF format.",
     skills: ["CRM", "WhatsApp Integration", "PDF Generation"],
-    repoLink: "https://github.com/ramtejvigna/vedic-baby-names",
+    repoLink: "https://github.com/ramtejvigna/CRM-vedic.git",
+    demoLink: "https://vedic-crm.netlify.app/"
   },
   {
     title: "AMILE",
     description: "Collaborated with a diverse group of experts to identify and address three major pain points in the job preparation landscape, utilizing AI and machine learning models for groundbreaking solutions aimed at transforming candidate experiences. Secure permission and authentication were added to the web interface, and the web platform was seamlessly integrated with ML models and APIs to create an interactive interview simulation experience.",
     skills: ["AI", "Machine Learning", "Interview Simulation"],
     demoLink: "https://amile.vercel.app",
+    repoLink: "https://github.com/avinasha18/amile.git"
   },
   {
     title: "AgriConnect AI",
     description: "Initiated a real-time interface to transform agriculture by solving farmers' biggest challenges using AI. The project improves productivity, crop and fertilizer recommendations, agricultural disease prediction, and market price prediction using machine learning algorithms.",
     skills: ["AI", "Machine Learning", "Agriculture"],
-    repoLink: "https://github.com/ramtejvigna/agriconnect-ai",
+    repoLink: "https://github.com/avinasha18/AgriConnect.git",
   },
   {
     title: "Customer Sentiment Dashboard",
     description: "Created a dashboard to assess client course feedback. This dashboard lets us examine trends and client sentiment regarding the offered courses. Machine learning algorithms categorized feedback attitudes using BERT and Random Forest models.",
     skills: ["BERT", "Random Forest", "Sentiment Analysis"],
-    repoLink: "https://github.com/ramtejvigna/sentiment-dashboard",
+    repoLink: "https://github.com/ramtejvigna/Customer-Feedback-Dashboard.git",
   },
 ];
 

@@ -49,7 +49,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
         <a href="#home" className="text-2xl font-bold text-primary">
-          <span className="hidden sm:inline">Vigna</span>
+          <span className="hidden sm:inline">Vigna Ramtej</span>
           <span className="sm:hidden">VR</span>
         </a>
         

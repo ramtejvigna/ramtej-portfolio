@@ -1,9 +1,9 @@
-
 import { motion } from "framer-motion";
 import { education, personalInfo } from "@/lib/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Resume from "./resume";
 
 const AboutMe = () => {
   return (
@@ -24,14 +24,15 @@ const AboutMe = () => {
           </p>
         </motion.div>
         
-        <div className="max-w-4xl mx-auto">
-          <Tabs defaultValue="education" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
+        <div className="mx-auto">
+          <Tabs defaultValue="education" className="w-full flex flex-col items-center">
+            <TabsList className="grid w-full grid-cols-3 mb-8 max-w-4xl">
               <TabsTrigger value="education">Education</TabsTrigger>
               <TabsTrigger value="personal">Personal Details</TabsTrigger>
+              <TabsTrigger value="resume">Resume</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="education">
+            <TabsContent value="education" className="flex items-center justify-evenly w-full">
               <Card className="glassmorphism">
                 <CardHeader>
                   <CardTitle>Education</CardTitle>
@@ -61,6 +62,9 @@ const AboutMe = () => {
                   </div>
                 </CardContent>
               </Card>
+              <div className="mt-8">
+                <img src="Me.jpg" alt="Ram" className="rounded-lg shadow-lg w-80" />
+              </div>
             </TabsContent>
             
             <TabsContent value="personal">
@@ -69,43 +73,61 @@ const AboutMe = () => {
                   <CardTitle>Personal Details</CardTitle>
                   <CardDescription>Get to know me better</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Full Name</p>
-                    <p className="font-medium">{personalInfo.name}</p>
-                  </div>
-                  
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Email</p>
-                    <a 
-                      href={`mailto:${personalInfo.email}`}
-                      className="font-medium text-primary hover:underline"
-                    >
-                      {personalInfo.email}
-                    </a>
-                  </div>
-                  
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Phone</p>
-                    <a 
-                      href={`tel:${personalInfo.phone}`}
-                      className="font-medium text-primary hover:underline"
-                    >
-                      {personalInfo.phone}
-                    </a>
-                  </div>
-                  
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Interests</p>
-                    <div className="flex flex-wrap gap-2 mt-1">
-                      <Badge>Web Development</Badge>
-                      <Badge>AI/ML</Badge>
-                      <Badge>Problem Solving</Badge>
-                      <Badge>Data Science</Badge>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="font-medium">
+                        I'm currently pursuing my undergraduate degree in Artificial Intelligence and Data Science at SRKR Engineering College.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Email</p>
+                      <a 
+                        href={`mailto:${personalInfo.email}`}
+                        className="font-medium text-primary hover:underline"
+                      >
+                        {personalInfo.email}
+                      </a>
+                    </div>
+                    
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Technical Skills</p>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        <Badge>Java</Badge>
+                        <Badge>Python</Badge>
+                        <Badge>Full Stack</Badge>
+                        <Badge>Data Structures</Badge>
+                        <Badge>DBMS</Badge>
+                        <Badge>Machine Learning</Badge>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Achievements</p>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li>3rd place in Hackoverflow 2k24 (National Hackathon)</li>
+                        <li>Junior Best Team award in SIH-2023 Internal Hackathon</li>
+                        <li>Completed 350+ coding problems across platforms</li>
+                        <li>Technical team member for workshops and hackathons</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">About Me</p>
+                      <p>
+                        I'm passionate about working with new technologies and dedicated to continuous learning. 
+                        I enjoy teaching web technologies and helping others develop their skills. 
+                        My experience includes mentoring students during hackathons and workshops, which has improved my teaching abilities while allowing me to stay at the cutting edge of technology.
+                      </p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="resume">
+              <Resume />
             </TabsContent>
           </Tabs>
         </div>
