@@ -11,7 +11,7 @@ export const personalInfo = {
 export const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/ramtejvigna",
+    url: "https://www.linkedin.com/in/vignaramtej/",
     icon: "linkedin",
   },
   {
