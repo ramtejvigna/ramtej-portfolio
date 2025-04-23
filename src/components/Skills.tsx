@@ -55,9 +55,13 @@ const Skills = () => {
         <div className="max-w-4xl mx-auto">
           <div>
             <Tabs defaultValue={categories[0]}>
-              <TabsList className="grid grid-cols-2 md:grid-cols-5 mb-8">
+              <TabsList className="grid grid-cols-2 h-36 md:h-auto md:grid-cols-5 mb-5 bg-white rounded-lg p-1 ">
                 {categories.map((category) => (
-                  <TabsTrigger key={category} value={category} className="text-sm">
+                  <TabsTrigger
+                    key={category}
+                    value={category}
+                    className="text-sm"
+                  >
                     {categoryLabels[category as keyof typeof categoryLabels]}
                   </TabsTrigger>
                 ))}

@@ -32,7 +32,7 @@ const AboutMe = () => {
               <TabsTrigger value="resume">Resume</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="education" className="flex items-center justify-evenly w-full">
+            <TabsContent value="education" className="flex flex-col md:flex-row items-center justify-evenly w-full">
               <Card className="glassmorphism">
                 <CardHeader>
                   <CardTitle>Education</CardTitle>

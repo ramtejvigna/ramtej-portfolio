@@ -26,7 +26,7 @@ const Hero = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
             Hi, I'm{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              {personalInfo.name.split(" ")[0] + personalInfo.name.split(" ")[1]}
+              {personalInfo.name.split(" ")[0] +" " + personalInfo.name.split(" ")[1]}
             </span>
           </h1>
           
