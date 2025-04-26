@@ -18,7 +18,7 @@ const navItems: NavItem[] = [
 ];
 
 const Navbar = () => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
