@@ -62,7 +62,7 @@ const Resume = () => {
                     className="w-full h-auto object-cover"
                     onError={(e) => {
                       (e.target as HTMLImageElement).onerror = null;
-                      (e.target as HTMLImageElement).src = "image.png"; // Fallback placeholder
+                      (e.target as HTMLImageElement).src = "resume.png"; // Fallback placeholder
                     }}
                   />
                 </div>

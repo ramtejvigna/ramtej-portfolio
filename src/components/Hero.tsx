@@ -74,9 +74,9 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex justify-center items-center rounded-3xl m-10 shadow-lg overflow-hidden"
+          className="flex justify-center items-center rounded-3xl m-10 mx-20 shadow-lg overflow-hidden"
         >
-          <img src="hero.png" alt="Vigna Ramtej" />
+          <img src="image.png" alt="Vigna Ramtej" />
         </motion.div>
       </div>
       
