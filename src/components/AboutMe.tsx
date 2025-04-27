@@ -108,7 +108,7 @@ const AboutMe = () => {
                       <ul className="list-disc pl-5 space-y-1">
                         <li>3rd place in Hackoverflow 2k24 (National Hackathon)</li>
                         <li>Junior Best Team award in SIH-2023 Internal Hackathon</li>
-                        <li>Completed 350+ coding problems across platforms</li>
+                        <li>Completed 400+ coding problems across platforms</li>
                         <li>Technical team member for workshops and hackathons</li>
                       </ul>
                     </div>

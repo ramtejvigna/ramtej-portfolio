@@ -141,7 +141,7 @@ export const achievements: Achievement[] = [
   },
   {
     title: "LeetCode Problem Solving",
-    description: "Solved more than 350 problems across all coding platforms, demonstrating strong problem-solving skills and proficiency in algorithms and data structures.",
+    description: "Solved more than 400 problems across all coding platforms, demonstrating strong problem-solving skills and proficiency in algorithms and data structures.",
   },
 ];
 
