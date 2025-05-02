@@ -70,6 +70,18 @@ export const projects: Project[] = [
     repoLink: "https://github.com/ramtejvigna/CodeBattleGround.git",
   },
   {
+    title: "DevSphere",
+    description: "A cutting-edge, cloud-based IDE revolutionizing developer workflows with multi-language support and real-time execution. Engineered a performant code execution environment with isolated Docker containers for secure runtime. Integrated Monaco Editor with custom language servers to provide intelligent code completion, syntax highlighting, and error checking across 5+ languages. Implemented collaborative editing features using operational transformation for real-time multi-user coding sessions.",
+    skills: [
+      "React.js", 
+      "Monaco Editor", 
+      "Docker", 
+      "Node.js", 
+      "Language Server Protocol"
+    ],
+    repoLink: "https://github.com/ramtejvigna/code-editor.git",
+  },
+  {
     title: "Vedic Baby Names - CRM",
     description: "Led the development of a CRM platform that produced customized baby name suggestions, deftly handling more than 200 client requests from the first inquiry to the last follow-up conversations. Controlled the whole development process, including front-end and back-end management, ensuring user identity was secure, and connecting WhatsApp via email to offer name options in PDF format.",
     skills: ["CRM", "WhatsApp Integration", "PDF Generation"],
