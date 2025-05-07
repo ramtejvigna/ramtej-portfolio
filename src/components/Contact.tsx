@@ -1,5 +1,4 @@
-
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { motion } from "framer-motion";
 import { personalInfo, socialLinks } from "@/lib/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,9 +9,10 @@ import { useToast } from "@/components/ui/use-toast";
 import emailjs from 'emailjs-com';
 import { Github, Linkedin, Code } from "lucide-react";
 
-const SERVICE_ID = "default_service"; // Replace with your EmailJS service ID
-const TEMPLATE_ID = "template_default"; // Replace with your EmailJS template ID
-const USER_ID = "user_yourUserID"; // Replace with your EmailJS user ID
+// Replace these with your actual EmailJS credentials
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "";
+const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID || "";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +24,11 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  useEffect(() => {
+    // Initialize EmailJS with your user ID
+    emailjs.init(USER_ID);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -34,11 +39,10 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // For demo purposes, we'll simulate a successful submission
-      // In a real application, you would configure EmailJS properly
-      
-      // Uncomment this code when you have proper EmailJS credentials
-      /*
+      if (!SERVICE_ID || !TEMPLATE_ID || !USER_ID) {
+        throw new Error("EmailJS credentials are not properly configured");
+      }
+
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
@@ -48,13 +52,9 @@ const ContactForm = () => {
           subject: formData.subject,
           message: formData.message,
           to_email: personalInfo.email,
-        },
-        USER_ID
+          time: new Date().toLocaleString(),
+        }
       );
-      */
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
         title: "Message sent!",
