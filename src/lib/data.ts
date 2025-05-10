@@ -152,7 +152,7 @@ export const achievements: Achievement[] = [
     description: "Awarded as the Junior best team at the Smart India Internal Hackathon 2023, which had over 250 participants.",
   },
   {
-    title: "LeetCode Problem Solving",
+    title: "Problem Solving",
     description: "Solved more than 400 problems across all coding platforms, demonstrating strong problem-solving skills and proficiency in algorithms and data structures.",
   },
 ];
