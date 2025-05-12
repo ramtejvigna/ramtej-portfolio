@@ -32,7 +32,7 @@ export const education: Education = {
   location: "Bhimavaram",
   period: "2022–Present",
   cgpa: "8.56/10.00",
-  courses: ["AI/ML", "Data Science for Engineers", "Computer Networks", "Web Technologies"],
+  courses: ["AI","Machine Learning", "Data Science", "Computer Networks", "Web Technologies"],
 };
 
 export const experiences: Experience[] = [
