@@ -31,27 +31,27 @@ export const education: Education = {
   institution: "Sagi Ramakrishnam Raju Engineering College",
   location: "Bhimavaram",
   period: "2022–Present",
-  cgpa: "8.56/10.00",
+  cgpa: "8.66/10.00",
   courses: ["AI","Machine Learning", "Data Science", "Computer Networks", "Web Technologies"],
 };
 
 export const experiences: Experience[] = [
   {
-    title: "Full Stack Development Intern",
+    title: "Full Stack Developer Intern",
     company: "Labfox.Studio",
-    period: "Mar 2025 – Present",
+    period: "Mar 2025 – May 2025",
     description: [
       "Modernized legacy UI/UX with Next.js and Tailwind CSS, implementing responsive design principles and reducing page load times by 40%, resulting in a 25% increase in user engagement.",
       "Engineered efficient API integrations, leveraging Supabase for real-time data validation and AI-driven insights.",
     ],
   },
   {
-    title: "Full Stack Development Intern",
+    title: "Python Developer Intern",
     company: "IIDT BlackBucks",
     period: "Jan 2025 – Feb 2025",
     description: [
-      "Developed Resume Builder app using Django/SQLite.",
-      "Implemented user authentication and document management systems.",
+      "Built a Resume Builder SaaS by integrating a resume editor with real time PDF preview.",
+      "The add-ons includes JWT-auth, social login, AI-powered content suggestions. This enables users to manage multiple versions of their resume. Delivered with CI/CD.",
     ],
   },
 ];
@@ -153,7 +153,7 @@ export const achievements: Achievement[] = [
   },
   {
     title: "Problem Solving",
-    description: "Solved more than 400 problems across all coding platforms, demonstrating strong problem-solving skills and proficiency in algorithms and data structures.",
+    description: "Solved more than 500 problems across all coding platforms, demonstrating strong problem-solving skills and proficiency in algorithms and data structures.",
   },
 ];
 

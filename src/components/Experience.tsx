@@ -43,9 +43,9 @@ const Experience = () => {
                       <div className="h-2 bg-gradient-to-r from-primary to-accent"></div>
                       <CardHeader>
                         <div className="flex justify-between items-start flex-wrap gap-2">
-                          <div>
+                          <div className="flex flex-row gap-2 justify-center">
                             <CardTitle>{experience.title}</CardTitle>
-                            <CardDescription>{experience.company}</CardDescription>
+                            <CardDescription className="text-lg text-muted-foreground">- {experience.company}</CardDescription>
                           </div>
                           <div className="text-sm text-muted-foreground px-3 py-1 rounded-full border">
                             {experience.period}
@@ -81,9 +81,9 @@ const Experience = () => {
                       <div className="h-2 bg-gradient-to-r from-accent to-primary"></div>
                       <CardHeader>
                         <div className="flex justify-between items-start flex-wrap gap-2">
-                          <div>
+                          <div className="flex flex-row gap-2 justify-center">
                             <CardTitle>{position.title}</CardTitle>
-                            <CardDescription>{position.organization}</CardDescription>
+                            <CardDescription className="text-lg text-muted-foreground">- {position.organization}</CardDescription>
                           </div>
                           <div className="text-sm text-muted-foreground px-3 py-1 rounded-full border">
                             {position.period}

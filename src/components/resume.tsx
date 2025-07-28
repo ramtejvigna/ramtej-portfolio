@@ -7,7 +7,7 @@ const Resume = () => {
   const [showResume, setShowResume] = useState(false);
 
   return (
-    <section id="resume" className="py-20 relative">
+    <section id="resume" className="pt-8 pb-20 relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,17 +23,17 @@ const Resume = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-full mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col md:flex-row gap-6 items-center"
+            className="flex flex-col md:flex-row gap-6 items-center justify-center"
           >
             {/* Resume Preview Card */}
             <motion.div 
-              className="bg-card border rounded-lg shadow-lg w-full overflow-hidden cursor-pointer"
+              className="bg-card border rounded-lg shadow-lg w-[80%] overflow-hidden cursor-pointer"
               whileTap={{ scale: 0.98 }}
               onClick={() => setShowResume(true)}
             >
@@ -59,7 +59,7 @@ const Resume = () => {
                   <img 
                     src="/resume-thumbnail.jpg" 
                     alt="Resume Preview" 
-                    className="w-full h-auto object-cover"
+                    className="w-screen h-96 object-cover"
                     onError={(e) => {
                       (e.target as HTMLImageElement).onerror = null;
                       (e.target as HTMLImageElement).src = "resume.png"; // Fallback placeholder
@@ -114,7 +114,7 @@ const Resume = () => {
               {/* PDF Viewer - Uses iframe to display the PDF */}
               <div className="w-full h-full min-h-[50rem] bg-white rounded">
                 <iframe
-                  src="Resum11.pdf"
+                  src="Vigna Ramtej T.pdf"
                   className="w-full h-[50rem] rounded border"
                   title="Resume PDF"
                 ></iframe>
