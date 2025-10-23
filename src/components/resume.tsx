@@ -9,19 +9,6 @@ const Resume = () => {
   return (
     <section id="resume" className="pt-8 pb-20 relative">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Resume</h2>
-          <div className="h-1 w-20 bg-primary mx-auto mb-8"></div>
-          <p className="text-lg text-foreground/80">
-            My professional experience and qualifications. Click on the resume preview to view the full document.
-          </p>
-        </motion.div>
 
         <div className="max-w-full mx-auto">
           <motion.div
@@ -62,7 +49,7 @@ const Resume = () => {
                     className="w-screen h-96 object-cover"
                     onError={(e) => {
                       (e.target as HTMLImageElement).onerror = null;
-                      (e.target as HTMLImageElement).src = "resume.png"; // Fallback placeholder
+                      (e.target as HTMLImageElement).src = "resume_1.png"; // Fallback placeholder
                     }}
                   />
                 </div>
@@ -112,10 +99,10 @@ const Resume = () => {
             </div>
             <div className="flex-1 overflow-auto p-4">
               {/* PDF Viewer - Uses iframe to display the PDF */}
-              <div className="w-full h-full min-h-[50rem] bg-white rounded">
+              <div className="w-full h-full min-h-[50rem] bg-background rounded">
                 <iframe
-                  src="Vigna Ramtej T.pdf"
-                  className="w-full h-[50rem] rounded border"
+                  src="Resume_Vigna_Ramtej.pdf"
+                  className="w-full h-[50rem] rounded border border-border"
                   title="Resume PDF"
                 ></iframe>
               </div>

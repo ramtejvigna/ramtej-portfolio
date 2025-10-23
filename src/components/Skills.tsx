@@ -1,39 +1,30 @@
 
 import { motion } from "framer-motion";
 import { skills } from "@/lib/data";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-const SkillBar = ({ name, level }: { name: string; level: number }) => {
-  return (
-    <div className="mb-4">
-      <div className="flex justify-between mb-1">
-        <span className="font-medium">{name}</span>
-        <span className="text-sm text-muted-foreground">{level}%</span>
-      </div>
-      <div className="h-2 bg-secondary rounded-full overflow-hidden">
-        <motion.div
-          className="skill-bar h-full"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.1 }}
-        />
-      </div>
-    </div>
-  );
-};
-
-const categoryLabels = {
-  language: "Programming Languages",
-  framework: "Frameworks & Libraries",
-  database: "Databases",
-  tool: "Tools & Technologies",
-  aiml: "AI & Machine Learning",
-};
+import ScrollVelocity from "./ScrollVelocity"
 
 const Skills = () => {
-  const categories = Array.from(new Set(skills.map(skill => skill.category)));
+  // Function to shuffle array for randomization
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // Create 4 rows of skills with different groupings
+  const skillsPerRow = Math.ceil(skills.length / 4);
+  const shuffledSkills = shuffleArray(skills);
+  
+  const skillRows = [
+    shuffledSkills.slice(0, skillsPerRow),
+    shuffledSkills.slice(skillsPerRow, skillsPerRow * 2), 
+    shuffledSkills.slice(skillsPerRow * 2, skillsPerRow * 3),
+    shuffledSkills.slice(skillsPerRow * 3)
+  ].filter(row => row.length > 0); // Remove empty rows
 
   return (
     <section id="skills" className="py-20 bg-secondary/30">
@@ -52,34 +43,17 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          <div>
-            <Tabs defaultValue={categories[0]}>
-              <TabsList className="grid grid-cols-2 h-36 md:h-auto md:grid-cols-5 mb-5 rounded-lg p-1 ">
-                {categories.map((category) => (
-                  <TabsTrigger
-                    key={category}
-                    value={category}
-                    className="text-sm"
-                  >
-                    {categoryLabels[category as keyof typeof categoryLabels]}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-
-              {categories.map((category) => (
-                <TabsContent key={category} value={category} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {skills
-                      .filter(skill => skill.category === category)
-                      .map((skill) => (
-                        <SkillBar key={skill.name} name={skill.name} level={skill.level} />
-                      ))}
-                  </div>
-                </TabsContent>
-              ))}
-            </Tabs>
-          </div>
+        <div className="max-w-7xl mx-auto">
+          <ScrollVelocity 
+            skillRows={skillRows}
+            velocity={100}
+            className="skill-icons-scroller" 
+            scrollContainerRef={undefined} 
+            parallaxStyle={{
+              padding: '2rem 0',
+            }} 
+            scrollerStyle={undefined}          
+          />
         </div>
       </div>
     </section>

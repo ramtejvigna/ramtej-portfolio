@@ -1,7 +1,6 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
 
 interface NavItem {
   label: string;
@@ -18,7 +17,6 @@ const navItems: NavItem[] = [
 ];
 
 const Navbar = () => {
-  const [isDark, setIsDark] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -34,12 +32,9 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
+    // Force dark mode always
+    document.documentElement.classList.add('dark');
+  }, []);
 
   return (
     <header 
@@ -69,15 +64,6 @@ const Navbar = () => {
         </nav>
         
         <div className="flex items-center space-x-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsDark(!isDark)}
-            aria-label="Toggle dark mode"
-          >
-            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-          
           <a href="#contact">
             <Button variant="default" className="hidden sm:flex">
               Contact Me

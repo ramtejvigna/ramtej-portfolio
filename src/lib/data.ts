@@ -3,7 +3,7 @@ import { Achievement, Certification, Education, Experience, Position, Project, S
 
 export const personalInfo = {
   name: "Vigna Ramtej Telagarapu",
-  tagline: ["Full Stack Developer", "AI/ML Engineer"],
+  tagline: ["Full Stack Developer", "AI/ML Engineer", "Competitive Programmer"],
   email: "vignaramtej46@gmail.com",
   phone: "9032149776",
 };
@@ -32,26 +32,26 @@ export const education: Education = {
   location: "Bhimavaram",
   period: "2022–Present",
   cgpa: "8.66/10.00",
-  courses: ["AI","Machine Learning", "Data Science", "Computer Networks", "Web Technologies"],
+  courses: ["AI","Machine Learning", "Data Analytics", "Computer Networks", "Web Technologies"],
 };
 
 export const experiences: Experience[] = [
+  {
+    title: "Backend Developer Apprentice",
+    company: "Secure Blink",
+    period: "Aug 2025 - Present",
+    description: [
+      "Designed and implemented a scalable backend service for the Bulk IP Lookup and Scanner interfaces, optimizing performance and reliability. Integrated AWS Cognito to enable secure, role-based user authentication and authorization",
+      "Managed backend with Serverless Framework on AWS Lambda for scalable production environments. And, mapped the OWASP Top 10 categories to a vulnerability scanner procedure that was integrated using ZAP. For actionable information, the scanning process was automated and made public via the backend API",
+    ],
+  },
   {
     title: "Full Stack Developer Intern",
     company: "Labfox.Studio",
     period: "Mar 2025 – May 2025",
     description: [
-      "Modernized legacy UI/UX with Next.js and Tailwind CSS, implementing responsive design principles and reducing page load times by 40%, resulting in a 25% increase in user engagement.",
-      "Engineered efficient API integrations, leveraging Supabase for real-time data validation and AI-driven insights.",
-    ],
-  },
-  {
-    title: "Python Developer Intern",
-    company: "IIDT BlackBucks",
-    period: "Jan 2025 – Feb 2025",
-    description: [
-      "Built a Resume Builder SaaS by integrating a resume editor with real time PDF preview.",
-      "The add-ons includes JWT-auth, social login, AI-powered content suggestions. This enables users to manage multiple versions of their resume. Delivered with CI/CD.",
+      "Revamped the platform’s UI/UX using Next.js and Tailwind CSS, implementing responsive design best practices that reduced page load times by 40% and boosted user engagement by 60% through efficient state management strategies.",
+      "Integrated and optimized APIs leveraging Supabase for real-time data synchronization and validation, enhancing system reliability and data accuracy across the application.",
     ],
   },
 ];
@@ -60,13 +60,14 @@ export const projects: Project[] = [
   {
     title: "Code Quest",
     description: "A POTD platform for solving coding challenges, tracking streaks, and competing on a live leaderboard. Integrated real-time data fetching from coding platforms to update user progress dynamically. Designed an instant search functionality using Typesense for fast and accurate problem discovery and user profiles.",
-    skills: ["Next.js", "TypeSense", "Real-time API"],
+    skills: ["React.js", "Real-time API", "GraphQL", "Indexing", "Rate limiting"],
     repoLink: "https://github.com/ramtejvigna/CODE-QUEST.git",
+    demoLink: "https://codequest.srkrcodingclub.in"
   },
   {
     title: "Code Battle Ground",
     description: "A competitive coding platform created utilizing Next.js for server-side rendering and user interactions. A strong backend using PostgreSQL (hosted on NeonDB). Containerized the application with Docker to provide uniform deployment environments. Enabled real-time code execution and leaderboard updates to enhance user engagement.",
-    skills: ["Next.js", "PostgreSQL", "Docker", "NeonDB"],
+    skills: ["Next.js", "PostgreSQL", "Node.js", "Docker", "NeonDB", "Prisma ORM"],
     repoLink: "https://github.com/ramtejvigna/CodeBattleGround.git",
   },
   {
@@ -84,14 +85,14 @@ export const projects: Project[] = [
   {
     title: "Vedic Baby Names - CRM",
     description: "Led the development of a CRM platform that produced customized baby name suggestions, deftly handling more than 200 client requests from the first inquiry to the last follow-up conversations. Controlled the whole development process, including front-end and back-end management, ensuring user identity was secure, and connecting WhatsApp via email to offer name options in PDF format.",
-    skills: ["CRM", "WhatsApp Integration", "PDF Generation"],
+    skills: ["CRM", "WhatsApp Integration", "PDF Generation", "React.js", "Express.js"],
     repoLink: "https://github.com/ramtejvigna/CRM-vedic.git",
     demoLink: "https://vedic-crm.netlify.app/"
   },
   {
     title: "AMILE",
     description: "Collaborated with a diverse group of experts to identify and address three major pain points in the job preparation landscape, utilizing AI and machine learning models for groundbreaking solutions aimed at transforming candidate experiences. Secure permission and authentication were added to the web interface, and the web platform was seamlessly integrated with ML models and APIs to create an interactive interview simulation experience.",
-    skills: ["AI", "Machine Learning", "Interview Simulation"],
+    skills: ["AI", "Machine Learning", "Interview Simulation", "Web Sockets"],
     demoLink: "https://amile.vercel.app",
     repoLink: "https://github.com/avinasha18/amile.git"
   },
