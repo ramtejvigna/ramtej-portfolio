@@ -25,7 +25,7 @@ const Experience = () => {
 
         <div className="max-w-7xl mx-auto">
           <Tabs defaultValue="experience" className="w-full">
-            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 mb-6 sm:mb-8">
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-6 sm:mb-8">
               <TabsTrigger value="experience">Professional Experience</TabsTrigger>
               <TabsTrigger value="positions">Leadership Positions</TabsTrigger>
               <TabsTrigger value="achievements">Achievements</TabsTrigger>

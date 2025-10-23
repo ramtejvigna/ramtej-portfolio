@@ -22,8 +22,8 @@ const AboutMe = () => {
         <div className="mx-auto">
           <Tabs defaultValue="personal" className="w-full flex flex-col items-center">
             <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-6 lg:mb-8 max-w-xs sm:max-w-sm md:max-w-md mx-auto">
-              <TabsTrigger value="personal" className="text-xs sm:text-sm md:text-base px-2 sm:px-4">Personal</TabsTrigger>
-              <TabsTrigger value="resume" className="text-xs sm:text-sm md:text-base px-2 sm:px-4">Resume</TabsTrigger>
+              <TabsTrigger value="personal" className="text-xs sm:text-sm px-2 sm:px-4">Personal</TabsTrigger>
+              <TabsTrigger value="resume" className="text-xs sm:text-sm px-2 sm:px-4">Resume</TabsTrigger>
             </TabsList>
 
             <TabsContent value="personal" className="w-full">

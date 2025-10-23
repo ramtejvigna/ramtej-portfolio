@@ -7,10 +7,10 @@ const Resume = () => {
   const [showResume, setShowResume] = useState(false);
 
   return (
-    <section id="resume" className="pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 relative">
+    <section id="resume" className="pt-4 w-full sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 relative">
       <div className="container mx-auto px-3 sm:px-4 lg:px-6">
 
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -20,7 +20,7 @@ const Resume = () => {
           >
             {/* Resume Preview Card */}
             <motion.div 
-              className="bg-card border rounded-lg shadow-lg w-full max-w-2xl overflow-hidden cursor-pointer"
+              className="bg-card border rounded-lg shadow-lg w-full max-w-4xl overflow-hidden cursor-pointer"
               whileTap={{ scale: 0.98 }}
               onClick={() => setShowResume(true)}
             >
