@@ -54,3 +54,12 @@ export interface Position {
   period: string;
   description: string[];
 }
+
+export interface CodingProfiles {
+  title: string;
+  username: string;
+  rank: number;
+  rating?: number;
+  problems?: number;
+  stars?: number;
+}

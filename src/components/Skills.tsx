@@ -36,21 +36,21 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Skills</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Skills</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-8"></div>
           <p className="text-lg text-foreground/80">
             My technical skills and proficiency levels.
           </p>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto overflow-hidden">
           <ScrollVelocity 
             skillRows={skillRows}
-            velocity={100}
+            velocity={80}
             className="skill-icons-scroller" 
             scrollContainerRef={undefined} 
             parallaxStyle={{
-              padding: '2rem 0',
+              padding: '1rem 0',
             }} 
             scrollerStyle={undefined}          
           />

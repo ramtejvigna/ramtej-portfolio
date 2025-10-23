@@ -31,7 +31,7 @@ const Hero = () => {
       />
       
       {/* Content container - positioned relatively to stay above background */}
-      <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ const Hero = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
                 {personalInfo.name.split(" ")[0]} {personalInfo.name.split(" ")[1]}
               </span>
@@ -56,7 +56,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl min-h-[2.5rem] flex items-center justify-center"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl min-h-[2rem] sm:min-h-[2.5rem] flex items-center justify-center"
           >
             <TextType
               text={personalInfo.tagline}
@@ -70,7 +70,7 @@ const Hero = () => {
               cursorClassName="text-primary"
             />
           </motion.div>
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto px-2">
             <ShinyText
               text={"I'm passionate about building modern web applications, AI systems, and solving real-world problems through technology."}
               disabled={false}
@@ -82,7 +82,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex justify-center space-x-6"
+            className="flex justify-center space-x-4 sm:space-x-6"
           >
             {socialLinks.map((link, index) => {
               const IconComponent = iconComponents[link.icon as keyof typeof iconComponents];
@@ -111,14 +111,14 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6"
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4"
           >
             <motion.a
               href="#projects"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-glow hover:shadow-glow-md transition-all duration-300 w-full sm:w-auto px-8 py-3">
+              <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-glow hover:shadow-glow-md transition-all duration-300 w-full sm:w-auto px-6 sm:px-8 py-3">
                 View Projects
               </Button>
             </motion.a>
@@ -127,7 +127,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 hover:shadow-glow transition-all duration-300 w-full sm:w-auto px-8 py-3">
+              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 hover:shadow-glow transition-all duration-300 w-full sm:w-auto px-6 sm:px-8 py-3">
                 Get In Touch
               </Button>
             </motion.a>

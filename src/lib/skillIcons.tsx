@@ -17,6 +17,7 @@ import {
   SiTensorflow,
   SiScikitlearn,
   SiPandas,
+  SiKubernetes,
   SiDocker,
   SiGit,
   SiTailwindcss,
@@ -58,6 +59,7 @@ export const skillIconMap: SkillIconMapping = {
   'Docker': <SiDocker className="text-blue-500" />,
   'Git': <SiGit className="text-orange-600" />,
   'Tailwind CSS': <SiTailwindcss className="text-teal-400" />,
+  'Kubernetes': <SiKubernetes className="text-blue-500" />
 };
 
 export const getSkillIcon = (skillName: string): ReactNode => {

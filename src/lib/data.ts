@@ -1,5 +1,5 @@
 
-import { Achievement, Certification, Education, Experience, Position, Project, Skill, SocialLink } from "@/types";
+import { Achievement, Certification, Education, Experience, Position, Project, Skill, SocialLink, CodingProfiles } from "@/types";
 
 export const personalInfo = {
   name: "Vigna Ramtej Telagarapu",
@@ -110,6 +110,16 @@ export const projects: Project[] = [
   },
 ];
 
+export const codingProfiles: CodingProfiles[] = [
+  {
+    title: "Leetcode",
+    username: "ramtejvigna",
+    rank: 337000,
+    rating: 0,
+    problems: 323
+  }
+]
+
 export const skills: Skill[] = [
   // Languages
   { name: "Java", level: 85, category: "language" },
@@ -141,6 +151,7 @@ export const skills: Skill[] = [
   { name: "Docker", level: 75, category: "tool" },
   { name: "Git", level: 85, category: "tool" },
   { name: "Tailwind CSS", level: 90, category: "tool" },
+  { name: "Kubernetes", level: 60, category: "tool" }
 ];
 
 export const achievements: Achievement[] = [

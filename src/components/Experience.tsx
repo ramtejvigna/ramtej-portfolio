@@ -25,14 +25,14 @@ const Experience = () => {
 
         <div className="max-w-7xl mx-auto">
           <Tabs defaultValue="experience" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 mb-6 sm:mb-8">
               <TabsTrigger value="experience">Professional Experience</TabsTrigger>
               <TabsTrigger value="positions">Leadership Positions</TabsTrigger>
               <TabsTrigger value="achievements">Achievements</TabsTrigger>
             </TabsList>
 
             <TabsContent value="experience" className="mt-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {experiences.map((experience, index) => (
                   <motion.div
                     key={`${experience.company}-${index}`}
@@ -73,7 +73,7 @@ const Experience = () => {
             </TabsContent>
 
             <TabsContent value="positions" className="mt-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {positions.map((position, index) => (
                   <motion.div
                     key={`${position.organization}-${index}`}

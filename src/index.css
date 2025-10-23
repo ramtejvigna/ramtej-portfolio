@@ -48,6 +48,27 @@
     @apply bg-background/60 backdrop-blur-md border border-border/50 shadow-lg;
   }
   
+  /* Mobile-first responsive utilities */
+  .mobile-padding {
+    @apply px-3 sm:px-4 md:px-6 lg:px-8;
+  }
+  
+  .mobile-text {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  .mobile-heading {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  .mobile-section {
+    @apply py-8 sm:py-12 md:py-16 lg:py-20;
+  }
+  
+  .mobile-container {
+    @apply px-3 sm:px-4 md:px-6 lg:px-8 mx-auto max-w-7xl;
+  }
+  
   .skill-bar {
     @apply h-2 rounded-full bg-primary relative overflow-hidden;
   }
