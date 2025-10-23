@@ -3,7 +3,7 @@ import { Achievement, Certification, Education, Experience, Position, Project, S
 
 export const personalInfo = {
   name: "Vigna Ramtej Telagarapu",
-  tagline: "B.Tech in AI & Data Science | Full Stack Developer | AI/ML Enthusiast",
+  tagline: ["Full Stack Developer", "AI/ML Engineer"],
   email: "vignaramtej46@gmail.com",
   phone: "9032149776",
 };
