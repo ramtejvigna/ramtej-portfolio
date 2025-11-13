@@ -69,6 +69,7 @@ export const projects: Project[] = [
     description: "A competitive coding platform created utilizing Next.js for server-side rendering and user interactions. A strong backend using PostgreSQL (hosted on NeonDB). Containerized the application with Docker to provide uniform deployment environments. Enabled real-time code execution and leaderboard updates to enhance user engagement.",
     skills: ["Next.js", "PostgreSQL", "Node.js", "Docker", "NeonDB", "Prisma ORM"],
     repoLink: "https://github.com/ramtejvigna/CodeBattleGround.git",
+    demoLink: "https://codebattleground.ram-innovate.me"
   },
   {
     title: "DevSphere",
@@ -81,6 +82,7 @@ export const projects: Project[] = [
       "Language Server Protocol"
     ],
     repoLink: "https://github.com/ramtejvigna/code-editor.git",
+    demoLink: "https://code-ide.ram-innovate.me"
   },
   {
     title: "Vedic Baby Names - CRM",
