@@ -55,8 +55,7 @@ const Navbar = () => {
       >
         <div className="container mx-auto flex justify-between items-center px-4">
           <a href="#home" className="text-2xl font-bold text-primary" onClick={handleNavClick}>
-            <span className="hidden sm:inline">Vigna Ramtej</span>
-            <span className="sm:hidden">VR</span>
+            <img src="android-chrome-192x192.png" alt="Logo" className="h-16 w-16" />
           </a>
           
           {/* Desktop Navigation */}

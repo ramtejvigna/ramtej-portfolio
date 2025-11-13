@@ -44,7 +44,7 @@ const Hero = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
                 {personalInfo.name.split(" ")[0]} {personalInfo.name.split(" ")[1]}
               </span>

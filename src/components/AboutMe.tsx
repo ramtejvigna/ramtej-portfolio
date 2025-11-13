@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Zap } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";
 import Resume from "./resume";
 
@@ -36,14 +37,18 @@ const AboutMe = () => {
                       </h3>
                       <div className="text-sm sm:text-base lg:text-lg text-foreground/80 leading-relaxed space-y-3 sm:space-y-4 max-w-4xl">
                         <p className="px-2 sm:px-4">
-                          I'm a results-driven <strong className="text-primary">AI and Full Stack Developer</strong> passionate about building intelligent, scalable, and high-performance solutions that solve real-world problems. With strong expertise in Java, Python, React, and Node.js, I deliver <strong className="text-primary">end-to-end systems</strong> that combine sleek user interfaces with powerful data-driven backends.
+                          I'm a <strong className="text-primary">Backend & Full Stack Developer</strong> who builds fast, secure, and scalable applications. 
                         </p>
                         <p className="px-2 sm:px-4">
-                          My work blends creativity with technical precision — from crafting seamless web experiences to deploying <strong className="text-primary">Machine Learning</strong> models that drive actionable insights. Having excelled in national hackathons and contributed to multiple full-stack and AI-driven projects, I bring hands-on experience, problem-solving ability, and a commitment to excellence to every collaboration.
+                          I specialize in <strong className="text-primary">cloud-native architectures</strong>, <strong className="text-primary">serverless systems</strong>, and modern JavaScript frameworks. 
                         </p>
+                        <p>From <strong className="text-primary">LLM-powered analysis tools to real-time coding platforms and end-to-end CRM</strong> solutions, my work blends performance, reliability, and clean engineering.</p>
                         <p className="px-2 sm:px-4">
-                          I take pride in understanding client needs deeply, communicating clearly, and delivering solutions that are not just functional — but <strong>impactful</strong>, <strong>efficient</strong>, and <strong>future-ready</strong>.
+                          I take pride in understanding client needs deeply, communicating clearly, and delivering solutions that are not just functional — but <strong>impactful</strong>, <strong>efficient</strong>, and <strong>future-ready</strong>. 
                         </p>
+                      </div>
+                      <div className="text-sm border rounded-lg px-2 sm:px-4 py-2 bg-primary/10 sm:text-base lg:text-lg text-foreground/80 leading-relaxed space-y-3 sm:space-y-4 max-w-4xl mt-4">
+                        <p>Explore my projects below and see how I turn ideas into impactful, production-ready products. <Zap className="inline-block w-4 h-4 ml-1 text-primary" /></p>
                       </div>
                     </div>
                   </div>
