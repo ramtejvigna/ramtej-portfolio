@@ -38,8 +38,12 @@ const Footer = () => {
           </div>
           
           <div className="text-center text-sm text-foreground/60 max-w-lg">
-            <p className="mb-3">
-              {personalInfo.tagline}
+            <p className="mb-3 flex flex-wrap justify-center gap-4">
+              {personalInfo.tagline.map((line, index) => (
+                <span key={index} className="block bg-primary/20 text-white p-2 rounded-full">
+                  {line}
+                </span>
+              ))}
             </p>
             
             <nav className="mb-6">

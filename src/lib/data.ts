@@ -72,7 +72,7 @@ export const projects: Project[] = [
     demoLink: "https://codebattleground.ram-innovate.me"
   },
   {
-    title: "DevSphere",
+    title: "Code IDE",
     description: "A cutting-edge, cloud-based IDE revolutionizing developer workflows with multi-language support and real-time execution. Engineered a performant code execution environment with isolated Docker containers for secure runtime. Integrated Monaco Editor with custom language servers to provide intelligent code completion, syntax highlighting, and error checking across 5+ languages. Implemented collaborative editing features using operational transformation for real-time multi-user coding sessions.",
     skills: [
       "React.js", 
