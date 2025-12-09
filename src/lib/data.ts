@@ -41,8 +41,8 @@ export const experiences: Experience[] = [
     company: "Secure Blink",
     period: "Aug 2025 - Present",
     description: [
-      "Designed and implemented a scalable backend service for the Bulk IP Lookup and Scanner interfaces, optimizing performance and reliability. Integrated AWS Cognito to enable secure, role-based user authentication and authorization",
-      "Managed backend with Serverless Framework on AWS Lambda for scalable production environments. And, mapped the OWASP Top 10 categories to a vulnerability scanner procedure that was integrated using ZAP. For actionable information, the scanning process was automated and made public via the backend API",
+      "Designed and implemented a scalable backend services, optimizing performance and reliability. Integrated AWS Cognito to enable secure, role-based user authentication and authorization",
+      "Managed backend with Serverless Framework on AWS Lambda for scalable production environments. For actionable information, the scanning process was automated and made public via the backend API",
     ],
   },
   {

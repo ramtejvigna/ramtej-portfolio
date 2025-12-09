@@ -99,11 +99,10 @@ src/
 
 ## 🎯 Current Role
 
-**Backend Developer Apprentice** at Secure Blink (Aug 2024 - Present)
+**Backend Developer Apprentice** at Secure Blink (Aug 2025 - Dec 2025)
 - Designing scalable backend services for cybersecurity applications
 - Implementing AWS Cognito for secure authentication
 - Working with Serverless Framework and AWS Lambda
-- Integrating OWASP vulnerability scanning with ZAP
 
 ---
 
