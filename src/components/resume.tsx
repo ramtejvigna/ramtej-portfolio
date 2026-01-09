@@ -79,7 +79,7 @@ const Resume = () => {
               </h3>
               <div className="flex items-center gap-1 sm:gap-2">
                 <motion.a
-                  href="Resum11.pdf" 
+                  href="VRT_Resume.pdf" 
                   download
                   className="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full"
                   whileHover={{ scale: 1.05 }}
@@ -101,7 +101,7 @@ const Resume = () => {
               {/* PDF Viewer - Uses iframe to display the PDF */}
               <div className="w-full h-full bg-background rounded">
                 <iframe
-                  src="Resume_Vigna_Ramtej.pdf"
+                  src="VRT_Resume.pdf"
                   className="w-full h-[70vh] sm:h-[60vh] lg:h-[70vh] rounded border border-border"
                   title="Resume PDF"
                 ></iframe>

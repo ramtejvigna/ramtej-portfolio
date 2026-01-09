@@ -39,7 +39,7 @@ export const experiences: Experience[] = [
   {
     title: "Backend Developer Apprentice",
     company: "Secure Blink",
-    period: "Aug 2025 - Present",
+    period: "Aug 2025 - Dec 2025",
     description: [
       "Designed and implemented a scalable backend services, optimizing performance and reliability. Integrated AWS Cognito to enable secure, role-based user authentication and authorization",
       "Managed backend with Serverless Framework on AWS Lambda for scalable production environments. For actionable information, the scanning process was automated and made public via the backend API",
