@@ -32,7 +32,7 @@ export const education: Education = {
   location: "Bhimavaram",
   period: "2022–Present",
   cgpa: "8.66/10.00",
-  courses: ["AI","Machine Learning", "Data Analytics", "Computer Networks", "Web Technologies"],
+  courses: ["AI", "Machine Learning", "Data Analytics", "Computer Networks", "Web Technologies"],
 };
 
 export const experiences: Experience[] = [
@@ -61,6 +61,8 @@ export const projects: Project[] = [
     title: "Code Quest",
     description: "A POTD platform for solving coding challenges, tracking streaks, and competing on a live leaderboard. Integrated real-time data fetching from coding platforms to update user progress dynamically. Designed an instant search functionality using Typesense for fast and accurate problem discovery and user profiles.",
     skills: ["React.js", "Real-time API", "GraphQL", "Indexing", "Rate limiting"],
+    category: "Full-Stack",
+    image: 'codequest.webp',
     repoLink: "https://github.com/ramtejvigna/CODE-QUEST.git",
     demoLink: "https://codequest.srkrcodingclub.in"
   },
@@ -68,6 +70,8 @@ export const projects: Project[] = [
     title: "Code Battle Ground",
     description: "A competitive coding platform created utilizing Next.js for server-side rendering and user interactions. A strong backend using PostgreSQL (hosted on NeonDB). Containerized the application with Docker to provide uniform deployment environments. Enabled real-time code execution and leaderboard updates to enhance user engagement.",
     skills: ["Next.js", "PostgreSQL", "Node.js", "Docker", "NeonDB", "Prisma ORM"],
+    category: "Full-Stack",
+    image: 'cbg.webp',
     repoLink: "https://github.com/ramtejvigna/CodeBattleGround.git",
     demoLink: "https://codebattleground.ram-innovate.me"
   },
@@ -75,12 +79,14 @@ export const projects: Project[] = [
     title: "Code IDE",
     description: "A cutting-edge, cloud-based IDE revolutionizing developer workflows with multi-language support and real-time execution. Engineered a performant code execution environment with isolated Docker containers for secure runtime. Integrated Monaco Editor with custom language servers to provide intelligent code completion, syntax highlighting, and error checking across 5+ languages. Implemented collaborative editing features using operational transformation for real-time multi-user coding sessions.",
     skills: [
-      "React.js", 
-      "Monaco Editor", 
-      "Docker", 
-      "Node.js", 
+      "React.js",
+      "Monaco Editor",
+      "Docker",
+      "Node.js",
       "Language Server Protocol"
     ],
+    category: "Full-Stack",
+    image: 'code-ide.webp',
     repoLink: "https://github.com/ramtejvigna/code-editor.git",
     demoLink: "https://code-ide.ram-innovate.me"
   },
@@ -88,6 +94,8 @@ export const projects: Project[] = [
     title: "Vedic Baby Names - CRM",
     description: "Led the development of a CRM platform that produced customized baby name suggestions, deftly handling more than 200 client requests from the first inquiry to the last follow-up conversations. Controlled the whole development process, including front-end and back-end management, ensuring user identity was secure, and connecting WhatsApp via email to offer name options in PDF format.",
     skills: ["CRM", "WhatsApp Integration", "PDF Generation", "React.js", "Express.js"],
+    category: "Full-Stack",
+    image: 'vedic.webp',
     repoLink: "https://github.com/ramtejvigna/CRM-vedic.git",
     demoLink: "https://vedic-crm.netlify.app/"
   },
@@ -95,6 +103,7 @@ export const projects: Project[] = [
     title: "AMILE",
     description: "Collaborated with a diverse group of experts to identify and address three major pain points in the job preparation landscape, utilizing AI and machine learning models for groundbreaking solutions aimed at transforming candidate experiences. Secure permission and authentication were added to the web interface, and the web platform was seamlessly integrated with ML models and APIs to create an interactive interview simulation experience.",
     skills: ["AI", "Machine Learning", "Interview Simulation", "Web Sockets"],
+    category: "AI",
     demoLink: "https://amile.vercel.app",
     repoLink: "https://github.com/avinasha18/amile.git"
   },
@@ -102,12 +111,14 @@ export const projects: Project[] = [
     title: "AgriConnect AI",
     description: "Initiated a real-time interface to transform agriculture by solving farmers' biggest challenges using AI. The project improves productivity, crop and fertilizer recommendations, agricultural disease prediction, and market price prediction using machine learning algorithms.",
     skills: ["AI", "Machine Learning", "Agriculture"],
+    category: "AI",
     repoLink: "https://github.com/avinasha18/AgriConnect.git",
   },
   {
     title: "Customer Sentiment Dashboard",
     description: "Created a dashboard to assess client course feedback. This dashboard lets us examine trends and client sentiment regarding the offered courses. Machine learning algorithms categorized feedback attitudes using BERT and Random Forest models.",
     skills: ["BERT", "Random Forest", "Sentiment Analysis"],
+    category: "AI",
     repoLink: "https://github.com/ramtejvigna/Customer-Feedback-Dashboard.git",
   },
 ];
@@ -129,7 +140,7 @@ export const skills: Skill[] = [
   { name: "C++", level: 75, category: "language" },
   { name: "JavaScript", level: 88, category: "language" },
   { name: "TypeScript", level: 82, category: "language" },
-  
+
   // Frameworks
   { name: "React.js", level: 90, category: "framework" },
   { name: "Next.js", level: 85, category: "framework" },
@@ -137,18 +148,18 @@ export const skills: Skill[] = [
   { name: "Express.js", level: 78, category: "framework" },
   { name: "Django", level: 75, category: "framework" },
   { name: "Flask", level: 70, category: "framework" },
-  
+
   // Databases
   { name: "PostgreSQL", level: 80, category: "database" },
   { name: "MongoDB", level: 78, category: "database" },
   { name: "MySQL", level: 75, category: "database" },
   { name: "Oracle SQL", level: 70, category: "database" },
-  
+
   // AI/ML
   { name: "TensorFlow", level: 80, category: "aiml" },
   { name: "Scikit-learn", level: 85, category: "aiml" },
   { name: "Pandas", level: 90, category: "aiml" },
-  
+
   // Tools
   { name: "Docker", level: 75, category: "tool" },
   { name: "Git", level: 85, category: "tool" },

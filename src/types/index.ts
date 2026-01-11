@@ -10,6 +10,7 @@ export interface Project {
   title: string;
   description: string;
   skills: string[];
+  category: "Full-Stack" | "AI";
   image?: string;
   repoLink?: string;
   demoLink?: string;
