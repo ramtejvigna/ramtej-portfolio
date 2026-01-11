@@ -63,7 +63,7 @@ export const projects: Project[] = [
     skills: ["React.js", "Real-time API", "GraphQL", "Indexing", "Rate limiting"],
     category: "Full-Stack",
     image: 'codequest.webp',
-    repoLink: "https://github.com/ramtejvigna/CODE-QUEST.git",
+    repoLink: "https://github.com/ramtejvigna/codequest.git",
     demoLink: "https://codequest.srkrcodingclub.in"
   },
   {
@@ -72,7 +72,7 @@ export const projects: Project[] = [
     skills: ["Next.js", "PostgreSQL", "Node.js", "Docker", "NeonDB", "Prisma ORM"],
     category: "Full-Stack",
     image: 'cbg.webp',
-    repoLink: "https://github.com/ramtejvigna/CodeBattleGround.git",
+    repoLink: "https://github.com/ramtejvigna/CBG.git",
     demoLink: "https://codebattleground.ram-innovate.me"
   },
   {
@@ -119,7 +119,7 @@ export const projects: Project[] = [
     description: "Created a dashboard to assess client course feedback. This dashboard lets us examine trends and client sentiment regarding the offered courses. Machine learning algorithms categorized feedback attitudes using BERT and Random Forest models.",
     skills: ["BERT", "Random Forest", "Sentiment Analysis"],
     category: "AI",
-    repoLink: "https://github.com/ramtejvigna/Customer-Feedback-Dashboard.git",
+    repoLink: "https://github.com/ramtejvigna/customer-feedback-analysis.git",
   },
 ];
 
