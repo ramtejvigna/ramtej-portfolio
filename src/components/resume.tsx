@@ -46,6 +46,7 @@ const Resume = () => {
                   <img 
                     src="/resume-thumbnail.jpg" 
                     alt="Resume Preview" 
+                    loading="lazy"
                     className="w-full h-48 sm:h-64 lg:h-80 object-cover"
                     onError={(e) => {
                       (e.target as HTMLImageElement).onerror = null;
