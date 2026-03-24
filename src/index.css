@@ -1,0 +1,163 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 47.4% 1.2%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 47.4% 3.2%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 47.4% 3.2%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 201 94% 50%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 261 50% 59%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .glassmorphism {
+    @apply bg-background/60 backdrop-blur-md border border-border/50 shadow-lg;
+  }
+  
+  /* Mobile-first responsive utilities */
+  .mobile-padding {
+    @apply px-3 sm:px-4 md:px-6 lg:px-8;
+  }
+  
+  .mobile-text {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  .mobile-heading {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  .mobile-section {
+    @apply py-8 sm:py-12 md:py-16 lg:py-20;
+  }
+  
+  .mobile-container {
+    @apply px-3 sm:px-4 md:px-6 lg:px-8 mx-auto max-w-7xl;
+  }
+  
+  .skill-bar {
+    @apply h-2 rounded-full bg-primary relative overflow-hidden;
+  }
+  
+  .skill-bar::before {
+    content: "";
+    @apply absolute top-0 left-0 h-full w-full bg-gradient-to-r from-primary to-accent animate-shimmer;
+    background-size: 200% 100%;
+  }
+  
+  .floating-icon {
+    @apply animate-float absolute;
+  }
+  
+  .tech-icon {
+    @apply w-12 h-12 rounded-full flex items-center justify-center glassmorphism shadow-glow;
+  }
+  
+  .nav-item {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
+  }
+  
+  .project-card {
+    @apply glassmorphism rounded-xl p-6 transition-all duration-500 hover:shadow-glow-md;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+  }
+  
+  .project-card .content {
+    transform: translateZ(20px);
+  }
+  
+  /* 3D scene styles */
+  .canvas-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .canvas-container canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+canvas {
+  touch-action: none;
+}
+
+.text-type {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.text-type__cursor {
+  margin-left: 0.25rem;
+  display: inline-block;
+  opacity: 1;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
+
