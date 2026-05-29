@@ -2226,7 +2226,7 @@ export default function Portfolio() {
                   <div className="flex items-center gap-4 py-4 px-2">
                     <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.2))" }} />
                     <span style={{ fontSize: 10, color: "#475569", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
-                      → MISSION_02 INITIATED
+                      →
                     </span>
                     <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg, rgba(167,139,250,0.2), transparent)" }} />
                   </div>
