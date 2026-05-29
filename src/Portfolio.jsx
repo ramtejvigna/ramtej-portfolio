@@ -31,12 +31,13 @@ import {
 const NAV_LINKS = ["Home", "About", "Skills", "Experience", "Projects", "Coding", "Contact"];
 
 const SKILLS = {
-  Languages: ["Java", "Python", "JavaScript", "TypeScript"],
-  Backend: ["Node.js", "Express.js", "Flask"],
-  Frontend: ["Next.js", "React.js"],
-  Databases: ["PostgreSQL", "MongoDB", "MySQL"],
-  "Cloud & Infra": ["AWS Lambda", "AWS Cognito", "Docker", "Serverless Framework", "CI/CD", "Prisma ORM", "Git"],
+  Languages: ["Java", "Python", "JavaScript", "TypeScript", "C++"],
+  Backend: ["Node.js", "Express.js", "Flask", "Kafka"],
+  Frontend: ["Next.js", "React.js", "Tailwind CSS"],
+  Databases: ["PostgreSQL", "MongoDB", "MySQL", "Redis"],
+  "Cloud & Infra": ["AWS Lambda", "AWS Cognito", "Docker", "Kubernetes", "Minikube", "Serverless Framework", "CI/CD", "Prisma ORM", "Git", "Terraform"],
   Core: ["REST APIs", "Auth & Authorization", "OOP", "Design Patterns", "Data Structures", "ACID Transactions"],
+  "Tools": ["Notion", "Openclaw"],
 };
 
 const SKILL_ICONS = {
@@ -46,6 +47,7 @@ const SKILL_ICONS = {
   Databases: <Database size={15} />,
   "Cloud & Infra": <Cloud size={15} />,
   Core: <Cpu size={15} />,
+  "Tools": <GitBranch size={15} />,
 };
 
 const SKILL_ACCENTS = {
@@ -54,18 +56,39 @@ const SKILL_ACCENTS = {
   Frontend:     { color: "#f472b6", glow: "rgba(244,114,182,0.11)",  border: "rgba(244,114,182,0.28)",  pillBg: "rgba(244,114,182,0.07)",  pillBorder: "rgba(244,114,182,0.22)",  pillGlow: "0 0 10px rgba(244,114,182,0.5)"  },
   Databases:    { color: "#60a5fa", glow: "rgba(96,165,250,0.11)",   border: "rgba(96,165,250,0.28)",   pillBg: "rgba(96,165,250,0.07)",   pillBorder: "rgba(96,165,250,0.22)",   pillGlow: "0 0 10px rgba(96,165,250,0.5)"   },
   "Cloud & Infra": { color: "#a78bfa", glow: "rgba(167,139,250,0.11)", border: "rgba(167,139,250,0.28)", pillBg: "rgba(167,139,250,0.07)", pillBorder: "rgba(167,139,250,0.22)", pillGlow: "0 0 10px rgba(167,139,250,0.5)" },
-  Core:         { color: "#fb923c", glow: "rgba(251,146,60,0.11)",   border: "rgba(251,146,60,0.28)",   pillBg: "rgba(251,146,60,0.07)",   pillBorder: "rgba(251,146,60,0.22)",   pillGlow: "0 0 10px rgba(251,146,60,0.5)"   },
+  Core:              { color: "#fb923c", glow: "rgba(251,146,60,0.11)",   border: "rgba(251,146,60,0.28)",   pillBg: "rgba(251,146,60,0.07)",   pillBorder: "rgba(251,146,60,0.22)",   pillGlow: "0 0 10px rgba(251,146,60,0.5)"   },
+  "Tools": { color: "#e2e8f0", glow: "rgba(226,232,240,0.11)", border: "rgba(226,232,240,0.28)", pillBg: "rgba(226,232,240,0.07)", pillBorder: "rgba(226,232,240,0.22)", pillGlow: "0 0 10px rgba(226,232,240,0.4)" },
 };
 
 const EXPERIENCES = [
+  {
+    company: "CoComply AI",
+    role: "Junior Software Engineer",
+    period: "Mar 2026 – Present",
+    tag: "GTM · AI Automation · FinTech",
+    color: "#0057D9",
+    monogram: "CC",
+    mission: "01",
+    metrics: [
+      { value: 230, suffix: "+", label: "Leads Qualified" },
+      { value: 2,   suffix: "",  label: "Features Shipped" },
+      { value: 3,   suffix: "+", label: "AI Agents Built" },
+    ],
+    bullets: [
+      "Qualified 230+ mid-range bank leads via LinkedIn outreach & SEC/press conference intel reports",
+      "Built structured GTM lead pipeline for AI-powered compliance solutions targeting mid-market banks",
+      "Designed & deployed Openclaw AI agents to automate GTM workflows, reducing team manual effort",
+      "Engineered CDE Mapping feature enabling banks to map, validate & certify critical data assets",
+    ],
+  },
   {
     company: "Secure Blink",
     role: "Backend Developer Intern",
     period: "Aug 2025 – Dec 2025",
     tag: "Security · Serverless",
-    color: "#00f5ff",
+    color: "#ef4444",
     monogram: "SB",
-    mission: "01",
+    mission: "02",
     metrics: [
       { value: 61, suffix: "%", label: "Latency Reduced" },
       { value: 15, suffix: "+", label: "APIs Secured" },
@@ -82,9 +105,9 @@ const EXPERIENCES = [
     role: "Full Stack Developer Intern",
     period: "Mar 2025 – May 2025",
     tag: "Frontend · Performance",
-    color: "#a78bfa",
+    color: "#f97316",
     monogram: "LF",
-    mission: "02",
+    mission: "03",
     metrics: [
       { value: 50, suffix: "%", label: "Faster Load" },
       { value: 18, suffix: "%", label: "Bounce Drop" },
@@ -2154,15 +2177,6 @@ export default function Portfolio() {
                       <div className="flex flex-col gap-1.5">
                         <span style={{ fontSize: 12, color: "#64748b", fontFamily: "'JetBrains Mono', monospace" }}>{exp.period}</span>
                         <span style={{ fontSize: 11, color: exp.color, fontFamily: "'JetBrains Mono', monospace", opacity: 0.65 }}>{exp.tag}</span>
-                      </div>
-
-                      <div className="flex items-center gap-2 mt-auto pt-2">
-                        <motion.span
-                          animate={{ opacity: [1, 0.2, 1] }}
-                          transition={{ duration: 2.2, repeat: Infinity }}
-                          style={{ width: 7, height: 7, borderRadius: "50%", background: "#22d3ee", display: "inline-block", boxShadow: "0 0 7px rgba(34,211,238,0.9)" }}
-                        />
-                        <span style={{ fontSize: 10, color: "#22d3ee", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.08em" }}>MISSION COMPLETE</span>
                       </div>
                     </div>
 
