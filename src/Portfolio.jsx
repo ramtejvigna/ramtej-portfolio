@@ -1900,8 +1900,8 @@ export default function Portfolio() {
               {/* Stat rows */}
               {[
                 { label: "Internships Completed", value: 2, suffix: "", decimals: 0, color: "#00f5ff" },
-                { label: "Projects Shipped", value: 3, suffix: "+", decimals: 0, color: "#7c3aed" },
-                { label: "Hackathon Wins", value: 1, suffix: "", decimals: 0, color: "#f59e0b" },
+                { label: "Projects Shipped", value: 4, suffix: "+", decimals: 0, color: "#7c3aed" },
+                { label: "Hackathon Achievements", value: 5, suffix: "", decimals: 0, color: "#f59e0b" },
                 { label: "Current CGPA", value: 8.56, suffix: "", decimals: 2, color: "#00f5ff" },
               ].map((stat) => (
                 <div key={stat.label}
