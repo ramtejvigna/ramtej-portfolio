@@ -1261,6 +1261,7 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [visitorPosition, setVisitorPosition] = useState(null);
   const [heroExploded, setHeroExploded] = useState(false);
   const typewriter = useTypewriter();
 
@@ -1377,9 +1378,36 @@ export default function Portfolio() {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  function formatVisitorOrdinal(value) {
+    const lastDigit = value % 10;
+    if (lastDigit === 1) return `${value}st`;
+    if (lastDigit === 2) return `${value}nd`;
+    if (lastDigit === 3) return `${value}rd`;
+    return `${value}th`;
+  }
+
   // ── Hero name letters ─────────────────────
   const heroName = "Vigna Ramtej";
   const nameLetters = heroName.split("");
+
+  // ── Visitor queue position (local browser scope) ──
+  useEffect(() => {
+    const totalKey = "portfolio_total_visitors";
+    const visitorKey = "portfolio_visitor_position";
+
+    const totalRaw = localStorage.getItem(totalKey);
+    const positionRaw = localStorage.getItem(visitorKey);
+
+    if (positionRaw) {
+      setVisitorPosition(Number(positionRaw));
+      return;
+    }
+
+    const nextCount = Number(totalRaw || 0) + 1;
+    localStorage.setItem(totalKey, String(nextCount));
+    localStorage.setItem(visitorKey, String(nextCount));
+    setVisitorPosition(nextCount);
+  }, []);
 
   // ─────────────────────────────────────────
   return (
@@ -1922,10 +1950,10 @@ export default function Portfolio() {
 
               {/* Stat rows */}
               {[
-                { label: "Internships Completed", value: 2, suffix: "", decimals: 0, color: "#00f5ff" },
-                { label: "Projects Shipped", value: 4, suffix: "+", decimals: 0, color: "#7c3aed" },
-                { label: "Hackathon Achievements", value: 5, suffix: "", decimals: 0, color: "#f59e0b" },
-                { label: "Current CGPA", value: 8.56, suffix: "", decimals: 2, color: "#00f5ff" },
+                { label: "Internships Completed", value: 3, suffix: "", decimals: 0, color: "#00f5ff" },
+                { label: "Projects Shipped", value: 35, suffix: "+", decimals: 0, color: "#7c3aed" },
+                { label: "Hackathon Achievements & Mentored", value: 10, suffix: "+", decimals: 0, color: "#f59e0b" },
+                // { label: "Current CGPA", value: 8.56, suffix: "", decimals: 2, color: "#00f5ff" },
               ].map((stat) => (
                 <div key={stat.label}
                   className="flex items-center gap-4 px-5 py-4 rounded-xl"
@@ -1995,10 +2023,10 @@ export default function Portfolio() {
                 {/* Terminal body */}
                 <div style={{ background: "rgba(5,8,16,0.85)", padding: "16px 18px", fontFamily: "'JetBrains Mono', monospace", fontSize: 12, lineHeight: 2.1 }}>
                   {[
-                    { key: "location", value: "Bhimavaram, AP, India", color: "#00f5ff" },
+                    { key: "location", value: "Visakhapatnam, AP, India", color: "#00f5ff" },
                     { key: "degree", value: "B.Tech AI & DS", color: "#a78bfa" },
                     { key: "year", value: "Final Year · 2022–26", color: "#a78bfa" },
-                    { key: "focus", value: "Backend + Full Stack", color: "#34d399" },
+                    { key: "focus", value: "Backend + AI/ML", color: "#34d399" },
                     { key: "available", value: "true", color: "#34d399" },
                   ].map(({ key, value, color }) => (
                     <div key={key} style={{ display: "flex", gap: 6, alignItems: "baseline" }}>
@@ -2817,16 +2845,46 @@ export default function Portfolio() {
       {/* FOOTER                               */}
       {/* ════════════════════════════════════ */}
       <footer
-        className="py-8 text-center border-t"
-        style={{ borderColor: "rgba(0,245,255,0.08)", background: "#050810" }}
+        className="relative border-t"
+        style={{
+          borderColor: "rgba(0,245,255,0.12)",
+          background: "linear-gradient(180deg, #050810, #04070f)",
+        }}
       >
-        <p
-          className="text-sm"
-          style={{ color: "#64748b", fontFamily: "'JetBrains Mono', monospace" }}
-        >
-          <span style={{ color: "#00f5ff" }}>$</span> Built with ♥ by{" "}
-          <span style={{ color: "#f0f4ff" }}>Vigna Ramtej</span>
-        </p>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 text-center">
+          <p
+            className="text-xl sm:text-2xl leading-relaxed"
+            style={{
+              color: "#e2e8f0",
+              fontFamily: "'Space Grotesk', sans-serif",
+              textWrap: "balance",
+            }}
+          >
+            "Great products are built when curiosity meets consistency."
+          </p>
+
+          <div
+            className="mx-auto mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border"
+            style={{
+              borderColor: "rgba(0,245,255,0.28)",
+              background: "rgba(0,245,255,0.08)",
+              color: "#67e8f9",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 13,
+            }}
+          >
+            <span
+              style={{
+                width: 7,
+                height: 7,
+                borderRadius: "50%",
+                background: "#22d3ee",
+                boxShadow: "0 0 10px rgba(34,211,238,0.8)",
+              }}
+            />
+            {visitorPosition ? `You're the ${formatVisitorOrdinal(visitorPosition)} visitor of this website.` : "Calculating your visitor position..."}
+          </div>
+        </div>
       </footer>
     </div>
   );
