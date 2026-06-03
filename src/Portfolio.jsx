@@ -1262,6 +1262,7 @@ export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [copied, setCopied] = useState(false);
   const [visitorPosition, setVisitorPosition] = useState(null);
+  const [visitorLoadFailed, setVisitorLoadFailed] = useState(false);
   const [heroExploded, setHeroExploded] = useState(false);
   const typewriter = useTypewriter();
 
@@ -1390,24 +1391,57 @@ export default function Portfolio() {
   const heroName = "Vigna Ramtej";
   const nameLetters = heroName.split("");
 
-  // ── Visitor queue position (local browser scope) ──
+  // ── Visitor queue position (server + DB) ──
   useEffect(() => {
-    const totalKey = "portfolio_total_visitors";
-    const visitorKey = "portfolio_visitor_position";
+    let isMounted = true;
 
-    const totalRaw = localStorage.getItem(totalKey);
-    const positionRaw = localStorage.getItem(visitorKey);
+    const loadVisitorPosition = async () => {
+      try {
+        const apiBase = import.meta.env.VITE_API_BASE_URL || "/api";
+        const response = await fetch(`${apiBase}/visitor`, {
+          method: "GET",
+          credentials: "include",
+        });
 
-    if (positionRaw) {
-      setVisitorPosition(Number(positionRaw));
-      return;
-    }
+        if (!response.ok) {
+          throw new Error(`Visitor API failed with status ${response.status}`);
+        }
 
-    const nextCount = Number(totalRaw || 0) + 1;
-    localStorage.setItem(totalKey, String(nextCount));
-    localStorage.setItem(visitorKey, String(nextCount));
-    setVisitorPosition(nextCount);
+        const payload = await response.json();
+        const position = Number(payload?.position);
+        if (!Number.isFinite(position) || position <= 0) {
+          throw new Error("Visitor API response did not include a valid position");
+        }
+
+        localStorage.setItem("portfolio_visitor_position_fallback", String(position));
+        if (isMounted) {
+          setVisitorPosition(position);
+          setVisitorLoadFailed(false);
+        }
+      } catch (error) {
+        console.error("Failed to load visitor position:", error);
+        const fallback = Number(localStorage.getItem("portfolio_visitor_position_fallback"));
+        if (isMounted && Number.isFinite(fallback) && fallback > 0) {
+          setVisitorPosition(fallback);
+        }
+        if (isMounted) {
+          setVisitorLoadFailed(true);
+        }
+      }
+    };
+
+    loadVisitorPosition();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+  const visitorMessage = visitorPosition
+    ? `You're the ${formatVisitorOrdinal(visitorPosition)} visitor of this website.`
+    : visitorLoadFailed
+      ? "Visitor position is temporarily unavailable."
+      : "Calculating your visitor position...";
 
   // ─────────────────────────────────────────
   return (
@@ -2882,7 +2916,7 @@ export default function Portfolio() {
                 boxShadow: "0 0 10px rgba(34,211,238,0.8)",
               }}
             />
-            {visitorPosition ? `You're the ${formatVisitorOrdinal(visitorPosition)} visitor of this website.` : "Calculating your visitor position..."}
+            {visitorMessage}
           </div>
         </div>
       </footer>
