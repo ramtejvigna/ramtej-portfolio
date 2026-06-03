@@ -1397,7 +1397,7 @@ export default function Portfolio() {
 
     const loadVisitorPosition = async () => {
       try {
-        const apiBase = import.meta.env.VITE_API_BASE_URL || "/api";
+        const apiBase = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_BACKEND_PROXY_TARGET || "/api";
         const response = await fetch(`${apiBase}/visitor`, {
           method: "GET",
           credentials: "include",
