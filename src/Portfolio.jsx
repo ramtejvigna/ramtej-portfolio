@@ -536,17 +536,20 @@ function useGitHubStats(username) {
   useEffect(() => {
     Promise.allSettled([
       fetch(`https://api.github.com/users/${username}`).then((r) => r.json()),
-      fetch(`https://github-contributions-api.jogruber.de/v4/${username}`).then((r) => r.json()),
+      fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`).then((r) => r.json()),
     ]).then(([userRes, contribRes]) => {
       const user   = userRes.status   === "fulfilled" ? userRes.value   : null;
       const contrib = contribRes.status === "fulfilled" ? contribRes.value : null;
       const year   = new Date().getFullYear().toString();
+      const contribList = contrib?.contributions ?? [];
       const totalContribs =
         contrib?.total?.[year] ??
-        (contrib?.total
-          ? Object.values(contrib.total).reduce((a, b) => a + b, 0)
+        (contribList.length
+          ? contribList
+              .filter((d) => d.date?.startsWith(year))
+              .reduce((sum, d) => sum + (d.count || 0), 0)
           : DSA_CONFIG.github.fallback.contributions);
-      const contribData = contrib?.contributions ?? [];
+      const contribData = contribList;
       if (user && user.public_repos != null) {
         setData({ repos: user.public_repos, followers: user.followers, contributions: totalContribs, contribData });
       } else {
@@ -706,6 +709,13 @@ function RingChart({ easy, medium, hard, total }) {
 // ─────────────────────────────────────────────
 // CONTRIBUTION HEATMAP
 // ─────────────────────────────────────────────
+function formatContribDateKey(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
 function ContribHeatmap({ contribData }) {
   const WEEKS = 30;
   const DAYS  = 7;
@@ -720,26 +730,54 @@ function ContribHeatmap({ contribData }) {
     "#22c55e",                // 4 — max
   ];
 
-  const recent = Array.isArray(contribData) ? contribData.slice(-(WEEKS * DAYS)) : [];
-  const padded = [...Array(Math.max(0, WEEKS * DAYS - recent.length)).fill({ count: 0, level: 0 }), ...recent];
-  const weeks  = Array.from({ length: WEEKS }, (_, w) => padded.slice(w * DAYS, w * DAYS + DAYS));
-  const svgW   = WEEKS * (size + gap) - gap;
-  const svgH   = DAYS  * (size + gap) - gap;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const currentWeekStart = new Date(today);
+  currentWeekStart.setDate(today.getDate() - today.getDay());
+
+  const gridStart = new Date(currentWeekStart);
+  gridStart.setDate(currentWeekStart.getDate() - (WEEKS - 1) * 7);
+
+  const byDate = new Map();
+  if (Array.isArray(contribData)) {
+    for (const entry of contribData) {
+      if (entry?.date) byDate.set(entry.date, entry);
+    }
+  }
+
+  const empty = { count: 0, level: 0 };
+  const weeks = [];
+
+  for (let w = 0; w < WEEKS; w++) {
+    const week = [];
+    for (let d = 0; d < DAYS; d++) {
+      const cellDate = new Date(gridStart);
+      cellDate.setDate(gridStart.getDate() + w * 7 + d);
+      week.push(cellDate > today ? null : byDate.get(formatContribDateKey(cellDate)) ?? empty);
+    }
+    weeks.push(week);
+  }
+
+  const svgW = WEEKS * (size + gap) - gap;
+  const svgH = DAYS  * (size + gap) - gap;
 
   return (
     <svg width="100%" viewBox={`0 0 ${svgW} ${svgH}`} style={{ display: "block" }}>
       {weeks.map((week, w) =>
-        week.map((day, d) => (
-          <rect
-            key={`${w}-${d}`}
-            x={w * (size + gap)}
-            y={d * (size + gap)}
-            width={size}
-            height={size}
-            rx={2}
-            fill={levelColors[Math.min(day.level ?? 0, 4)]}
-          />
-        ))
+        week.map((day, d) =>
+          day ? (
+            <rect
+              key={`${w}-${d}`}
+              x={w * (size + gap)}
+              y={d * (size + gap)}
+              width={size}
+              height={size}
+              rx={2}
+              fill={levelColors[Math.min(day.level ?? 0, 4)]}
+            />
+          ) : null
+        )
       )}
     </svg>
   );
