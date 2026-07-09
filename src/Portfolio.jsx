@@ -2540,7 +2540,8 @@ export default function Portfolio() {
               </div>
             </motion.div>
 
-            {/* ─── GitHub Card ─── */}
+            {/*
+            ─── GitHub Card ───
             <motion.div
               initial={{ opacity: 0, x: 44 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -2552,92 +2553,9 @@ export default function Portfolio() {
                 border: "1px solid rgba(226,232,240,0.12)",
               }}
             >
-              {/* Window chrome */}
-              <div className="flex items-center gap-2 px-5 py-3 border-b" style={{ borderColor: "rgba(226,232,240,0.07)", background: "rgba(0,0,0,0.32)" }}>
-                <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ef4444", display: "inline-block", boxShadow: "0 0 4px #ef4444aa" }} />
-                <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#f59e0b", display: "inline-block", boxShadow: "0 0 4px #f59e0baa" }} />
-                <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#22c55e", display: "inline-block", boxShadow: "0 0 4px #22c55eaa" }} />
-                <span style={{ flex: 1, textAlign: "center", fontSize: 11, color: "#64748b", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.06em" }}>
-                  ~/github_activity.sh
-                </span>
-                <a
-                  href={DSA_CONFIG.github.profileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 transition-all duration-200"
-                  style={{ fontSize: 11, color: DSA_CONFIG.github.color, fontFamily: "'JetBrains Mono', monospace", opacity: 0.65 }}
-                  onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.65"; }}
-                >
-                  <ExternalLink size={11} /> view
-                </a>
-              </div>
-
-              {/* Identity row */}
-              <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
-                <div className="flex items-center gap-3">
-                  <div
-                    className="flex items-center justify-center w-10 h-10 rounded-xl"
-                    style={{ background: "rgba(226,232,240,0.07)", border: "1px solid rgba(226,232,240,0.2)", boxShadow: "0 0 16px rgba(226,232,240,0.07)" }}
-                  >
-                    <GitBranch size={18} color={DSA_CONFIG.github.color} />
-                  </div>
-                  <div>
-                    <p style={{ fontSize: 16, fontWeight: 700, color: "#f0f4ff", fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.2, margin: 0 }}>GitHub</p>
-                    <p style={{ fontSize: 11, color: "#475569", fontFamily: "'JetBrains Mono', monospace", margin: 0 }}>@{DSA_CONFIG.github.username}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contribution heatmap */}
-              <div className="px-6 pt-5 pb-3">
-                <div className="flex items-center justify-between mb-3">
-                  <span style={{ fontSize: 10, color: "#94a3b8", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.12em" }}>
-                    CONTRIBUTION_MAP // {new Date().getFullYear()}
-                  </span>
-                  {!ghLoading && (
-                    <span style={{ fontSize: 12, color: "#22c55e", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700 }}>
-                      <CountUp target={ghData.contributions} suffix=" commits" />
-                    </span>
-                  )}
-                </div>
-                {ghLoading ? (
-                  <div
-                    className="dsa-skeleton"
-                    style={{ height: 76, borderRadius: 8, background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.04)" }}
-                  />
-                ) : (
-                  <ContribHeatmap contribData={ghData.contribData} />
-                )}
-              </div>
-
-              {/* Stat tiles */}
-              <div className="grid grid-cols-3 gap-3 px-6 pb-6 mt-auto">
-                {[
-                  { label: "REPOS",         value: ghData?.repos,         suffix: "",  color: "#e2e8f0" },
-                  { label: "FOLLOWERS",     value: ghData?.followers,     suffix: "",  color: "#a78bfa" },
-                  { label: "CONTRIBUTIONS", value: ghData?.contributions, suffix: "+", color: "#22d3ee" },
-                ].map(({ label, value, suffix, color }) => (
-                  <div
-                    key={label}
-                    className="flex flex-col items-center justify-center gap-1.5 py-4 rounded-xl relative overflow-hidden"
-                    style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.055)" }}
-                  >
-                    {/* Top edge glow */}
-                    <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 60, height: 1, background: `linear-gradient(90deg, transparent, ${color}55, transparent)` }} />
-                    {ghLoading ? (
-                      <div className="dsa-skeleton" style={{ width: 44, height: 28, borderRadius: 5, background: "rgba(255,255,255,0.06)" }} />
-                    ) : (
-                      <span style={{ fontSize: 26, fontWeight: 800, color, fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1, textShadow: `0 0 22px ${color}44` }}>
-                        <CountUp target={value ?? 0} suffix={suffix} />
-                      </span>
-                    )}
-                    <span style={{ fontSize: 9, color: "#94a3b8", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em", textAlign: "center" }}>{label}</span>
-                  </div>
-                ))}
-              </div>
-
+              ...
             </motion.div>
+            */}
 
           </div>
 
