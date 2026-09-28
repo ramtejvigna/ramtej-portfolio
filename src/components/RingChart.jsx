@@ -34,33 +34,33 @@ export default function RingChart({ easy, medium, hard, total }) {
       <svg width={160} height={160} style={{ overflow: "visible" }}>
         <circle cx={CX} cy={CY} r={R + 14} fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth={1} strokeDasharray="3 6" />
         <circle cx={CX} cy={CY} r={R} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth={11} />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#22c55e" strokeWidth={11}
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#93b4ff" strokeWidth={11}
           strokeLinecap="butt"
           strokeDasharray={`${eL} ${C}`}
           strokeDashoffset={0}
           transform={`rotate(-90 ${CX} ${CY})`}
-          style={{ transition: animated ? `stroke-dasharray ${dur}` : "none", filter: "drop-shadow(0 0 6px #22c55e)" }}
+          style={{ transition: animated ? `stroke-dasharray ${dur}` : "none", filter: "drop-shadow(0 0 6px #93b4ff)" }}
         />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#f59e0b" strokeWidth={11}
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#3b82f6" strokeWidth={11}
           strokeLinecap="butt"
           strokeDasharray={`${mL} ${C}`}
           strokeDashoffset={mOff}
           transform={`rotate(-90 ${CX} ${CY})`}
-          style={{ transition: animated ? `stroke-dasharray ${dur} 0.2s` : "none", filter: "drop-shadow(0 0 6px #f59e0b)" }}
+          style={{ transition: animated ? `stroke-dasharray ${dur} 0.2s` : "none", filter: "drop-shadow(0 0 6px #3b82f6)" }}
         />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#ef4444" strokeWidth={11}
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#f5f7ff" strokeWidth={11}
           strokeLinecap="butt"
           strokeDasharray={`${hL} ${C}`}
           strokeDashoffset={hOff}
           transform={`rotate(-90 ${CX} ${CY})`}
-          style={{ transition: animated ? `stroke-dasharray ${dur} 0.4s` : "none", filter: "drop-shadow(0 0 6px #ef4444)" }}
+          style={{ transition: animated ? `stroke-dasharray ${dur} 0.4s` : "none", filter: "drop-shadow(0 0 6px rgba(255,255,255,0.6))" }}
         />
       </svg>
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", pointerEvents: "none" }}>
-        <span style={{ fontSize: 28, fontWeight: 900, color: "#f0f4ff", fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1, textShadow: "0 0 24px rgba(255,255,255,0.25)" }}>
+        <span style={{ fontSize: 28, fontWeight: 900, color: "#f0f4ff", fontFamily: "var(--font-display)", lineHeight: 1, textShadow: "0 0 24px rgba(255,255,255,0.25)" }}>
           {total}
         </span>
-        <span style={{ fontSize: 9, color: "#475569", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.12em", marginTop: 4 }}>
+        <span style={{ fontSize: 9, color: "#9aa6c4", fontFamily: "var(--font-mono)", letterSpacing: "0.12em", marginTop: 4 }}>
           SOLVED
         </span>
       </div>

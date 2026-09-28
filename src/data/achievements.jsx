@@ -2,9 +2,8 @@ import { Trophy, Award } from "lucide-react";
 
 export const ACHIEVEMENTS = [
   {
-    icon: <Trophy size={26} />,
+    icon: <Trophy size={24} />,
     rank: "WINNER",
-    color: "#f59e0b",
     index: "ACH_01",
     event: "Hackoverflow 2K24",
     scale: "National Level",
@@ -18,9 +17,8 @@ export const ACHIEVEMENTS = [
     desc: "National-level hackathon. Competed against top engineering teams across India to build an innovative solution under 24 hours.",
   },
   {
-    icon: <Award size={26} />,
+    icon: <Award size={24} />,
     rank: "BEST JUNIOR",
-    color: "#22d3ee",
     index: "ACH_02",
     event: "SIH Internal 2023",
     scale: "Internal Selection",

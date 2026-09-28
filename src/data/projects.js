@@ -3,7 +3,6 @@ export const PROJECTS = [
     id: "01",
     name: "Code Battle Ground",
     subtitle: "Competitive Programming Arena",
-    color: "#00f5ff",
     stats: [
       { value: 5, suffix: "",  decimals: 0, label: "Languages" },
       { value: 0, suffix: "",  decimals: 0, label: "Breaches" },
@@ -21,7 +20,6 @@ export const PROJECTS = [
     id: "02",
     name: "Vedic Baby Names",
     subtitle: "CRM Automation",
-    color: "#f59e0b",
     stats: [
       { value: 87,   suffix: "%", decimals: 0, label: "Time Saved" },
       { value: 99.2, suffix: "%", decimals: 1, label: "API Uptime" },
@@ -39,7 +37,6 @@ export const PROJECTS = [
     id: "03",
     name: "AMILE",
     subtitle: "Career Development & Talent Networking",
-    color: "#a78bfa",
     stats: [
       { value: 11, suffix: "",  decimals: 0, label: "Endpoints" },
       { value: 60, suffix: "%", decimals: 0, label: "Fewer Bugs" },
@@ -57,7 +54,6 @@ export const PROJECTS = [
     id: "04",
     name: "Multimodal Sentiment Analyzer",
     subtitle: "Deep Learning · Emotion Recognition",
-    color: "#ec4899",
     stats: [
       { value: 94.6,  suffix: "%",  decimals: 1, label: "Text Accuracy" },
       { value: 80,  suffix: "%",  decimals: 0, label: "Face Accuracy" },
@@ -72,18 +68,3 @@ export const PROJECTS = [
     github: "https://github.com/ramtejvigna/multimodel-sentiment/tree/v2",
   },
 ];
-
-export const STACK_COLORS = {
-  "Next.js":     "bg-zinc-800 text-zinc-200 border-zinc-600",
-  "PostgreSQL":  "bg-blue-950 text-blue-300 border-blue-700",
-  "Docker":      "bg-sky-950 text-sky-300 border-sky-700",
-  "React.js":    "bg-cyan-950 text-cyan-300 border-cyan-700",
-  "Node.js":     "bg-green-950 text-green-300 border-green-700",
-  "Express.js":  "bg-neutral-800 text-neutral-300 border-neutral-600",
-  "MongoDB":     "bg-emerald-950 text-emerald-300 border-emerald-700",
-  "Python":      "bg-yellow-950 text-yellow-300 border-yellow-700",
-  "TensorFlow":  "bg-orange-950 text-orange-300 border-orange-700",
-  "Keras":       "bg-red-950 text-red-300 border-red-800",
-  "OpenCV":      "bg-teal-950 text-teal-300 border-teal-700",
-  "Flask":       "bg-stone-800 text-stone-300 border-stone-600",
-};

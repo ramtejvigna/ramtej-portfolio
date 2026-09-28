@@ -1,119 +1,134 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import { NAV_LINKS } from "../data/nav";
+import Magnetic from "./Magnetic";
+
+import { EASE_IN_OUT as EASE } from "../lib/motion";
 
 export default function Navbar({ activeSection, onNav }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setHidden(y > prev && y > 400 && !menuOpen);
+    setScrolled(y > 40);
+  });
 
   const go = (link) => {
-    onNav(link);
     setMenuOpen(false);
+    onNav(link);
   };
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full flex items-center justify-between">
-
-          <button onClick={() => go("Home")} className="flex items-center gap-2">
-            <span
-              className="text-xl font-bold px-2 py-0.5 rounded border"
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                color: "#00f5ff",
-                borderColor: "#00f5ff55",
-                background: "rgba(0,245,255,0.06)",
-                letterSpacing: "0.05em",
-              }}
-            >
-              ~/RT
+      <motion.header
+        className="fixed inset-x-0 top-0 z-[80] px-4 sm:px-8"
+        animate={{ y: hidden ? "-120%" : "0%" }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div
+          className={`mx-auto mt-4 flex max-w-7xl items-center justify-between rounded-full px-3 py-2 transition-all duration-500 ${
+            scrolled ? "glass" : "border border-transparent"
+          }`}
+        >
+          <button onClick={() => go("Home")} className="group flex items-center gap-2.5 pl-2" aria-label="Home">
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-snow font-display text-sm font-bold text-ink transition-transform duration-500 group-hover:rotate-[360deg]">
+              VR
+            </span>
+            <span className="hidden sm:block font-display text-sm font-semibold tracking-tight text-snow">
+              Vigna Ramtej<span className="text-azure">.</span>
             </span>
           </button>
 
-          <nav
-            className="hidden md:flex items-center gap-0.5 p-1 rounded-full"
-            style={{
-              background: "rgba(5,8,16,0.78)",
-              backdropFilter: "blur(20px)",
-              border: "1px solid rgba(0,245,255,0.13)",
-              boxShadow: "0 0 0 1px rgba(0,245,255,0.04) inset, 0 4px 24px rgba(0,0,0,0.5)",
-            }}
-          >
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link}
-                onClick={() => go(link)}
-                className="relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-150"
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  color: activeSection === link ? "#050810" : "#64748b",
-                  zIndex: 1,
-                }}
-              >
-                {activeSection === link && (
-                  <motion.div
-                    layoutId="pill-active"
-                    className="absolute inset-0 rounded-full"
-                    style={{ background: "#00f5ff", zIndex: -1 }}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.38 }}
-                  />
-                )}
-                {link}
-              </button>
-            ))}
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV_LINKS.filter((l) => l !== "Home").map((link) => {
+              const active = activeSection === link;
+              return (
+                <button
+                  key={link}
+                  onClick={() => go(link)}
+                  className={`relative px-4 py-2 font-display text-sm font-medium transition-colors duration-300 ${
+                    active ? "text-ink" : "text-mist hover:text-snow"
+                  }`}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-snow"
+                      transition={{ type: "spring", bounce: 0.18, duration: 0.5 }}
+                    />
+                  )}
+                  <span className="relative">{link}</span>
+                </button>
+              );
+            })}
           </nav>
 
-          <button
-            className="md:hidden p-2"
-            style={{ color: "#00f5ff" }}
-            onClick={() => setMenuOpen((v) => !v)}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="flex items-center gap-2">
+            <Magnetic className="hidden sm:inline-block">
+              <button
+                onClick={() => go("Contact")}
+                className="group relative overflow-hidden rounded-full bg-cobalt px-5 py-2.5 font-display text-sm font-semibold text-snow"
+              >
+                <span className="absolute inset-0 translate-y-full rounded-full bg-snow transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
+                <span className="relative transition-colors duration-500 group-hover:text-ink">Let&apos;s talk</span>
+              </button>
+            </Magnetic>
+
+            <button
+              className="lg:hidden relative flex h-11 w-11 items-center justify-center rounded-full border border-white/15"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+            >
+              <span className="relative block h-3 w-5">
+                <span className={`absolute left-0 h-px w-5 bg-snow transition-all duration-300 ${menuOpen ? "top-1.5 rotate-45" : "top-0"}`} />
+                <span className={`absolute left-0 h-px w-5 bg-snow transition-all duration-300 ${menuOpen ? "top-1.5 -rotate-45" : "top-3"}`} />
+              </span>
+            </button>
+          </div>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center"
-            style={{ background: "rgba(5,8,16,0.97)", backdropFilter: "blur(24px)" }}
+            initial={{ clipPath: "circle(0% at 100% 0%)" }}
+            animate={{ clipPath: "circle(150% at 100% 0%)" }}
+            exit={{ clipPath: "circle(0% at 100% 0%)" }}
+            transition={{ duration: 0.8, ease: EASE }}
+            className="fixed inset-0 z-[70] flex flex-col justify-end bg-navy px-6 pb-12 pt-28"
           >
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="absolute top-5 right-5"
-              style={{ color: "#00f5ff" }}
-            >
-              <X size={26} />
-            </button>
-            <div className="flex flex-col items-center gap-8">
+            <nav className="flex flex-col gap-1">
               {NAV_LINKS.map((link, i) => (
-                <motion.button
-                  key={link}
-                  initial={{ opacity: 0, y: 22 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ delay: i * 0.055, duration: 0.28 }}
-                  onClick={() => go(link)}
-                  className="text-4xl font-bold"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    color: activeSection === link ? "#00f5ff" : "#64748b",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  {link}
-                </motion.button>
+                <div key={link} className="overflow-hidden">
+                  <motion.button
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: "100%" }}
+                    transition={{ delay: 0.25 + i * 0.05, duration: 0.6, ease: EASE }}
+                    onClick={() => go(link)}
+                    className={`flex items-baseline gap-4 font-display text-5xl font-semibold tracking-tight ${
+                      activeSection === link ? "text-snow" : "text-snow/40"
+                    }`}
+                  >
+                    <span className="font-mono text-xs text-sky">0{i + 1}</span>
+                    {link}
+                  </motion.button>
+                </div>
               ))}
-            </div>
-            <p style={{ position: "absolute", bottom: 32, color: "#1e293b", fontSize: 11, fontFamily: "'JetBrains Mono', monospace" }}>
-              tap link to navigate · × to close
-            </p>
+            </nav>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.6 }}
+              className="mt-10 font-mono text-xs text-mist"
+            >
+              vignaramtej46@gmail.com
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>

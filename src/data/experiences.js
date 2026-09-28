@@ -4,8 +4,6 @@ export const EXPERIENCES = [
     role: "Junior Software Engineer",
     period: "Mar 2026 – Present",
     tag: "GTM · AI Automation · FinTech",
-    color: "#0057D9",
-    monogram: "CC",
     mission: "01",
     metrics: [
       { value: 230, suffix: "+", label: "Leads Qualified" },
@@ -24,8 +22,6 @@ export const EXPERIENCES = [
     role: "Backend Developer Intern",
     period: "Aug 2025 – Dec 2025",
     tag: "Security · Serverless",
-    color: "#ef4444",
-    monogram: "SB",
     mission: "02",
     metrics: [
       { value: 61, suffix: "%", label: "Latency Reduced" },
@@ -43,8 +39,6 @@ export const EXPERIENCES = [
     role: "Full Stack Developer Intern",
     period: "Mar 2025 – May 2025",
     tag: "Frontend · Performance",
-    color: "#f97316",
-    monogram: "LF",
     mission: "03",
     metrics: [
       { value: 50, suffix: "%", label: "Faster Load" },

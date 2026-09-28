@@ -17,7 +17,7 @@ export default function NeuralCanvas({ explode }) {
     resize();
     window.addEventListener("resize", resize);
 
-    const count = 120;
+    const count = window.innerWidth < 768 ? 60 : 110;
     sim.particles = Array.from({ length: count }, () => {
       const depth = Math.random();
       const speed = 0.10 + (1 - depth) * 0.22;
@@ -70,9 +70,9 @@ export default function NeuralCanvas({ explode }) {
           if (d >= maxDist) continue;
           const nearness = 1 - (p.depth + q.depth) / 2;
           const alpha = (1 - d / maxDist) * 0.15 * (0.35 + nearness * 0.65);
-          const rgb = (p.isCyan && q.isCyan) ? "0,245,255"
-            : (!p.isCyan && !q.isCyan) ? "124,58,237"
-            : "60,180,220";
+          const rgb = (p.isCyan && q.isCyan) ? "147,180,255"
+            : (!p.isCyan && !q.isCyan) ? "59,130,246"
+            : "110,150,255";
           ctx.strokeStyle = `rgba(${rgb},${alpha})`;
           ctx.lineWidth = 0.3 + nearness * 0.45;
           ctx.beginPath();
@@ -93,7 +93,7 @@ export default function NeuralCanvas({ explode }) {
         const py = p.y + (q.y - p.y) * pulse.progress;
         const nearness = 1 - (p.depth + q.depth) / 2;
         const bright = 0.55 + nearness * 0.45;
-        const rgb = p.isCyan ? "0,245,255" : "124,58,237";
+        const rgb = p.isCyan ? "147,180,255" : "59,130,246";
         ctx.beginPath();
         ctx.arc(px, py, 5 + nearness * 3, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${rgb},${bright * 0.22})`;
@@ -122,7 +122,7 @@ export default function NeuralCanvas({ explode }) {
       for (const p of pts) {
         const pulseOpacity = p.baseOpacity * (0.72 + 0.28 * Math.sin(p.pulse));
         const drawSize = Math.max(0.3, p.size);
-        const rgb = p.isCyan ? "0,245,255" : "124,58,237";
+        const rgb = p.isCyan ? "147,180,255" : "59,130,246";
         if (p.isHub) {
           const glowR = drawSize * 5;
           const g = ctx.createRadialGradient(p.x, p.y, drawSize * 0.5, p.x, p.y, glowR);

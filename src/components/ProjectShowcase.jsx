@@ -1,283 +1,128 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { GitBranch, ExternalLink } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { GitBranch } from "lucide-react";
 import CountUp from "./CountUp";
-import { PROJECTS, STACK_COLORS } from "../data/projects";
+import Button from "./Button";
+import { PROJECTS } from "../data/projects";
 
-export default function ProjectShowcase() {
-  const [active, setActive] = useState(0);
-  const proj = PROJECTS[active];
+function useIsDesktop() {
+  const query = "(min-width: 1024px)";
+  const [match, setMatch] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const onChange = () => setMatch(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return match;
+}
+
+function ProjectCard({ proj, i, total, progress, stacked }) {
+  const targetScale = 1 - (total - i) * 0.04;
+  const scale = useTransform(progress, [i / total, 1], [1, targetScale]);
 
   return (
-    <div
-      className="rounded-2xl overflow-hidden flex flex-col lg:grid lg:grid-cols-[1fr_280px]"
-      style={{
-        border: "1px solid rgba(255,255,255,0.07)",
-        background: "rgba(5,8,22,0.72)",
-        backdropFilter: "blur(20px)",
-        boxShadow: "0 32px 80px rgba(0,0,0,0.55)",
-      }}
-    >
-      <div
-        className="relative overflow-hidden p-8 lg:p-10 border-b lg:border-b-0 lg:border-r"
-        style={{ borderColor: "rgba(255,255,255,0.06)" }}
+    <div className="lg:sticky lg:h-[88vh]" style={{ top: stacked ? 96 + i * 26 : undefined }}>
+      <motion.article
+        style={{ scale: stacked ? scale : 1 }}
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="spotlight relative origin-top overflow-hidden rounded-[2rem] border border-white/10 bg-night shadow-[0_-20px_80px_-20px_rgba(0,0,0,0.9)]"
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.34 }}
-            className="relative"
-          >
-            <div
-              className="absolute -top-2 right-0 pointer-events-none select-none"
-              style={{
-                fontSize: 140,
-                fontFamily: "'JetBrains Mono', monospace",
-                fontWeight: 900,
-                color: proj.color,
-                opacity: 0.04,
-                lineHeight: 1,
-              }}
-            >
-              {proj.id}
-            </div>
-
-            <div className="flex items-center gap-3 mb-5">
-              <span
-                style={{
-                  fontSize: 10,
-                  color: proj.color,
-                  fontFamily: "'JetBrains Mono', monospace",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
-              >
-                project_{proj.id}
+        <div className="grid lg:grid-cols-[1.1fr_1fr]">
+          {/* Copy */}
+          <div className="flex flex-col p-8 sm:p-12">
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-xs text-sky">
+                {proj.id} / {String(total).padStart(2, "0")}
               </span>
-              <span
-                style={{
-                  flex: 1,
-                  height: 1,
-                  background: `linear-gradient(90deg, ${proj.color}44, transparent)`,
-                }}
-              />
+              <span className="h-px flex-1 bg-white/10" />
             </div>
 
-            <h3
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "clamp(26px, 4vw, 38px)",
-                fontWeight: 800,
-                color: "#f0f4ff",
-                lineHeight: 1.1,
-                marginBottom: 8,
-              }}
-            >
+            <h3 className="mt-8 font-display text-4xl font-semibold leading-[1.02] tracking-[-0.03em] text-snow sm:text-5xl">
               {proj.name}
             </h3>
-            <p
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: 13,
-                color: proj.color,
-                marginBottom: 24,
-                opacity: 0.8,
-              }}
-            >
-              {proj.subtitle}
-            </p>
+            <p className="mt-3 serif-accent text-xl text-sky sm:text-2xl">{proj.subtitle}</p>
 
-            <div className="flex flex-wrap gap-2 mb-7">
-              {proj.stack.map((s) => (
-                <span
-                  key={s}
-                  className={`text-xs px-2.5 py-1 rounded-lg border ${STACK_COLORS[s] || "bg-zinc-800 text-zinc-300 border-zinc-600"}`}
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-8 mb-7">
-              {proj.stats.map((stat) => (
-                <div key={stat.label} className="flex flex-col gap-1">
-                  <span
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: 32,
-                      fontWeight: 800,
-                      color: proj.color,
-                      lineHeight: 1,
-                    }}
-                  >
-                    <CountUp target={stat.value} suffix={stat.suffix} decimals={stat.decimals} />
-                  </span>
-                  <span style={{ fontSize: 11, color: "#475569", fontFamily: "'Inter', sans-serif" }}>
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <ul className="flex flex-col gap-3 mb-8">
-              {proj.bullets.map((b, i) => (
-                <li key={i} className="flex gap-3 text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
-                  <span style={{ color: proj.color, flexShrink: 0, marginTop: 2 }}>▹</span>
+            <ul className="mt-8 flex flex-col gap-3.5">
+              {proj.bullets.map((b, bi) => (
+                <li key={bi} className="flex gap-4 text-[15px] leading-relaxed text-mist">
+                  <span className="mt-[0.6em] h-px w-4 shrink-0 bg-azure" />
                   <span>{b}</span>
                 </li>
               ))}
             </ul>
 
-            <div
-              className="flex items-center justify-between pt-5"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-            >
-              <a
-                href={proj.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: proj.color,
-                  fontFamily: "'JetBrains Mono', monospace",
-                  padding: "7px 16px",
-                  borderRadius: 8,
-                  border: `1px solid ${proj.color}33`,
-                  background: `${proj.color}0d`,
-                  textDecoration: "none",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = `${proj.color}1f`;
-                  e.currentTarget.style.borderColor = `${proj.color}66`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = `${proj.color}0d`;
-                  e.currentTarget.style.borderColor = `${proj.color}33`;
-                }}
-              >
-                <GitBranch size={13} /> GitHub <ExternalLink size={11} />
-              </a>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {proj.stack.map((s) => (
+                <span key={s} className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 font-mono text-xs text-mist">
+                  {s}
+                </span>
+              ))}
             </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
 
-      <div
-        className="flex flex-col p-6"
-        style={{ background: "rgba(5,8,22,0.45)" }}
-      >
-        <span
-          style={{
-            fontSize: 9,
-            color: "#64748b",
-            fontFamily: "'JetBrains Mono', monospace",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            marginBottom: 12,
-            display: "block",
-          }}
-        >
-          / project_index
-        </span>
+            <div className="mt-10 pt-2 lg:mt-auto">
+              <Button href={proj.github} variant="ghost" icon={<GitBranch size={15} />}>
+                View source
+              </Button>
+            </div>
+          </div>
 
-        <div className="flex flex-col gap-2">
-          {PROJECTS.map((p, i) => {
-            const isActive = i === active;
-            return (
-              <button
-                key={p.id}
-                onClick={() => setActive(i)}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 3,
-                  padding: "14px 12px",
-                  borderRadius: 12,
-                  background: isActive ? `${p.color}12` : "transparent",
-                  border: `1px solid ${isActive ? p.color + "30" : "transparent"}`,
-                  textAlign: "left",
-                  cursor: "pointer",
-                  transition: "all 0.22s",
-                  width: "100%",
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) e.currentTarget.style.background = "transparent";
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span
-                    style={{
-                      fontSize: 10,
-                      fontFamily: "'JetBrains Mono', monospace",
-                      color: isActive ? p.color : "#64748b",
-                      fontWeight: 700,
-                      transition: "color 0.22s",
-                    }}
-                  >
-                    {p.id}
+          {/* Visual */}
+          <div className="relative min-h-[320px] overflow-hidden border-t border-white/10 bg-gradient-to-br from-cobalt via-navy to-ink lg:border-l lg:border-t-0">
+            <div className="absolute inset-0 opacity-50 [background-image:radial-gradient(rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,#000,transparent_75%)]" />
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              className="absolute -right-24 -top-24 h-80 w-80 rounded-full border border-white/10"
+            />
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+              className="absolute -right-10 -top-10 h-52 w-52 rounded-full border border-dashed border-sky/25"
+            />
+            <div className="absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-azure/40 blur-[90px]" />
+
+            <span className="pointer-events-none absolute right-6 top-4 select-none font-display text-[10rem] font-bold leading-none tracking-tighter text-white/[0.07] sm:text-[13rem]">
+              {proj.id}
+            </span>
+
+            <div className="relative flex h-full flex-col justify-end gap-3 p-8 sm:p-10">
+              {proj.stats.map((stat, si) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + si * 0.12, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-ink/40 px-5 py-4 backdrop-blur-md"
+                >
+                  <span className="text-sm text-snow/70">{stat.label}</span>
+                  <span className="font-display text-2xl font-semibold tracking-tight text-snow sm:text-3xl">
+                    <CountUp target={stat.value} suffix={stat.suffix} decimals={stat.decimals} />
                   </span>
-                  {isActive && (
-                    <motion.span
-                      animate={{ opacity: [1, 0.3, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      style={{
-                        width: 5,
-                        height: 5,
-                        borderRadius: "50%",
-                        background: p.color,
-                        display: "inline-block",
-                        boxShadow: `0 0 7px ${p.color}`,
-                      }}
-                    />
-                  )}
-                </div>
-                <span
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: isActive ? "#f0f4ff" : "#475569",
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    transition: "color 0.22s",
-                  }}
-                >
-                  {p.name}
-                </span>
-                <span
-                  style={{
-                    fontSize: 11,
-                    color: isActive ? p.color : "#64748b",
-                    fontFamily: "'JetBrains Mono', monospace",
-                    transition: "color 0.22s",
-                    opacity: isActive ? 0.75 : 1,
-                  }}
-                >
-                  {p.subtitle}
-                </span>
-              </button>
-            );
-          })}
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
+      </motion.article>
+    </div>
+  );
+}
 
-        <div
-          className="mt-auto pt-5"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-        >
-          <span style={{ fontSize: 10, color: "#64748b", fontFamily: "'JetBrains Mono', monospace" }}>
-            {PROJECTS.length} repos · {[...new Set(PROJECTS.flatMap((p) => p.stack))].length} technologies
-          </span>
-        </div>
-      </div>
+export default function ProjectShowcase() {
+  const ref = useRef(null);
+  const stacked = useIsDesktop();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+
+  return (
+    <div ref={ref} className="flex flex-col gap-8 lg:gap-0">
+      {PROJECTS.map((proj, i) => (
+        <ProjectCard key={proj.id} proj={proj} i={i} total={PROJECTS.length} progress={scrollYProgress} stacked={stacked} />
+      ))}
     </div>
   );
 }
