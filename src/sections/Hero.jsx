@@ -10,7 +10,7 @@ import { EASE, INTRO_DELAY } from "../lib/motion";
 
 const D = INTRO_DELAY;
 
-const MARQUEE_ITEMS = ["Backend Systems", "Serverless on AWS", "Full-Stack Products", "AI Automation", "API Design", "Performance Engineering"];
+const MARQUEE_ITEMS = ["Backend Systems", "LLM Pipelines", "Serverless on AWS", "Full-Stack Products", "AI Automation", "API Design", "Performance Engineering"];
 
 const HERO_STATS = [
   { value: "3", label: "Internships" },
@@ -105,8 +105,8 @@ export default function Hero({ onNav }) {
               transition={{ delay: D + 1.1, duration: 0.8, ease: EASE }}
               className="mt-6 max-w-xl text-base leading-relaxed text-mist sm:text-lg"
             >
-              Full-stack &amp; backend engineer turning ideas into production systems, from serverless
-              Lambdas and ACID-safe databases to polished product experiences.
+              Full-stack engineer who owns features end to end, from Django and PostgreSQL backends and
+              LLM pipelines to serverless AWS and polished Next.js products.
             </motion.p>
 
             <motion.div

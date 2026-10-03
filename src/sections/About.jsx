@@ -48,9 +48,9 @@ export default function About() {
             </div>
 
             <p className="max-w-xl text-base leading-relaxed text-mist">
-              Pursuing a B.Tech in <span className="text-snow">AI &amp; Data Science</span> at Sagi Ramakrishnam Raju
-              Engineering College (2022–2026). Currently shipping AI automation and compliance features as a
-              Junior Software Engineer at <span className="text-snow">CoComply AI</span>.
+              Graduated with a B.Tech in <span className="text-snow">AI &amp; Data Science</span> from Sagi Ramakrishnam Raju
+              Engineering College (2022–2026). Now building Django backends and LLM pipelines as a
+              Backend &amp; Automation Engineer at <span className="text-snow">CoComply AI</span>.
             </p>
 
             <div className="flex flex-wrap gap-2">
@@ -68,9 +68,9 @@ export default function About() {
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-sky/30 blur-3xl" />
           <GraduationCap className="relative text-snow/80" size={22} />
           <p className="relative mt-6 font-display text-6xl font-semibold tracking-tight text-snow">
-            <CountUp target={8.56} decimals={2} />
+            <CountUp target={8.58} decimals={2} />
           </p>
-          <p className="relative mt-1 text-sm text-snow/75">CGPA · B.Tech AI &amp; DS</p>
+          <p className="relative mt-1 text-sm text-snow/75">CGPA · B.Tech AI &amp; DS, Class of 2026</p>
         </motion.div>
 
         {/* Location */}

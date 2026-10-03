@@ -9,12 +9,12 @@ import {
 } from "lucide-react";
 
 export const SKILLS = {
-  Languages: ["Java", "Python", "JavaScript", "TypeScript", "C++"],
-  Backend: ["Node.js", "Express.js", "Flask", "Kafka"],
+  Languages: ["Python", "TypeScript", "JavaScript", "Java", "SQL", "C++"],
+  Backend: ["Django", "Node.js", "Express.js", "Flask", "Kafka"],
   Frontend: ["Next.js", "React.js", "Tailwind CSS"],
   Databases: ["PostgreSQL", "MongoDB", "MySQL", "Redis"],
-  "Cloud & Infra": ["AWS Lambda", "AWS Cognito", "Docker", "Kubernetes", "Minikube", "Serverless Framework", "CI/CD", "Prisma ORM", "Git", "Terraform"],
-  Core: ["REST APIs", "Auth & Authorization", "OOP", "Design Patterns", "Data Structures", "ACID Transactions"],
+  "Cloud & Infra": ["AWS Lambda", "AWS Amplify", "AWS Cognito", "Docker", "Kubernetes", "Minikube", "Serverless Framework", "CI/CD", "Prisma ORM", "Git", "Terraform"],
+  Core: ["REST APIs", "LLM Integration", "RBAC", "OAuth 2.0", "Auth & Authorization", "OOP", "Design Patterns", "Data Structures", "ACID Transactions"],
   "Tools": ["Notion", "Openclaw"],
 };
 

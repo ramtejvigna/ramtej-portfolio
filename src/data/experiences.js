@@ -1,20 +1,20 @@
 export const EXPERIENCES = [
   {
     company: "CoComply AI",
-    role: "Junior Software Engineer",
+    role: "Backend & Automation Engineer",
     period: "Mar 2026 – Present",
-    tag: "GTM · AI Automation · FinTech",
+    tag: "Django · LLM Pipelines · RegTech",
     mission: "01",
     metrics: [
-      { value: 230, suffix: "+", label: "Leads Qualified" },
-      { value: 2,   suffix: "",  label: "Features Shipped" },
-      { value: 3,   suffix: "+", label: "AI Agents Built" },
+      { value: 6,   suffix: "",  label: "Backend Modules" },
+      { value: 130, suffix: "+", label: "API Routes Shipped" },
+      { value: 3,   suffix: "",  label: "Async LLM Job Types" },
     ],
     bullets: [
-      "Qualified 230+ mid-range bank leads via LinkedIn outreach & SEC/press conference intel reports",
-      "Built structured GTM lead pipeline for AI-powered compliance solutions targeting mid-market banks",
-      "Designed & deployed Openclaw AI agents to automate GTM workflows, reducing team manual effort",
-      "Engineered CDE Mapping feature enabling banks to map, validate & certify critical data assets",
+      "Built features on a 6-module Django + PostgreSQL backend, including Regulatory Intelligence APIs and schema changes",
+      "Shipped an internal GTM platform (Next.js, TypeScript, 130+ API routes) on AWS Amplify covering leads, scoring, content & analytics",
+      "Designed a queue + Python worker system so 3 types of long-running LLM jobs run asynchronously",
+      "Built a Regulatory Intelligence pipeline that uses LLMs to turn regulator documents into structured requirements",
     ],
   },
   {
@@ -26,11 +26,11 @@ export const EXPERIENCES = [
     metrics: [
       { value: 61, suffix: "%", label: "Latency Reduced" },
       { value: 15, suffix: "+", label: "APIs Secured" },
-      { value: 3,  suffix: "",  label: "Breaches Blocked" },
+      { value: 890, suffix: "ms", label: "Cold Start" },
     ],
     bullets: [
       "Monolith → serverless Lambda migration: cold-start latency 61% down (2.3s → 890ms)",
-      "RBAC system protecting 15+ API endpoints, blocked 3 unauthorized access events",
+      "Role-based access control (RBAC) protecting 15+ API endpoints",
       "Static code analysis engine detecting OWASP Top 10 vulnerabilities",
     ],
   },
