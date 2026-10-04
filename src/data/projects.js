@@ -1,7 +1,12 @@
+import { Swords, Sparkles, Handshake, Brain } from "lucide-react";
+
 export const PROJECTS = [
   {
     id: "01",
     name: "Code Battle Ground",
+    slug: "code-battle-ground",
+    icon: Swords,
+    tint: "from-sky-400/30 to-blue-700/30 text-sky-300",
     subtitle: "Competitive Programming Arena",
     stats: [
       { value: 9,  suffix: "",   decimals: 0, label: "Languages" },
@@ -20,6 +25,9 @@ export const PROJECTS = [
   {
     id: "02",
     name: "Vedic Baby Names",
+    slug: "vedic-baby-names",
+    icon: Sparkles,
+    tint: "from-amber-300/25 to-orange-600/25 text-amber-200",
     subtitle: "CRM Automation",
     stats: [
       { value: 87,   suffix: "%", decimals: 0, label: "Time Saved" },
@@ -36,6 +44,9 @@ export const PROJECTS = [
   {
     id: "03",
     name: "AMILE",
+    slug: "amile",
+    icon: Handshake,
+    tint: "from-emerald-300/25 to-teal-700/25 text-emerald-200",
     subtitle: "Career Development & Talent Networking",
     stats: [
       { value: 11, suffix: "",  decimals: 0, label: "Endpoints" },
@@ -52,6 +63,9 @@ export const PROJECTS = [
   {
     id: "04",
     name: "Multimodal Sentiment Analyzer",
+    slug: "sentiment-analyzer",
+    icon: Brain,
+    tint: "from-violet-400/30 to-indigo-700/30 text-violet-200",
     subtitle: "Deep Learning · Emotion Recognition",
     stats: [
       { value: 94.6,  suffix: "%",  decimals: 1, label: "Text Accuracy" },

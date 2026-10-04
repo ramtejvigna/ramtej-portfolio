@@ -8,8 +8,8 @@ import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
-import Experience from "./sections/Experience";
-import Projects from "./sections/Projects";
+import Work from "./sections/Work";
+import YouTube from "./sections/YouTube";
 import Coding from "./sections/Coding";
 import Achievements from "./sections/Achievements";
 import Contact from "./sections/Contact";
@@ -23,7 +23,7 @@ export default function Portfolio() {
   return (
     <div className="relative min-h-screen bg-ink text-snow">
       <SmoothScroll />
-      <Preloader />
+
       <Cursor />
       <Background />
       <ScrollProgress />
@@ -33,8 +33,8 @@ export default function Portfolio() {
         <Hero onNav={scrollToId} />
         <About />
         <Skills />
-        <Experience />
-        <Projects />
+        <Work />
+        <YouTube />
         <Coding />
         <Achievements />
         <Contact />

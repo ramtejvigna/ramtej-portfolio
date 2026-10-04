@@ -1,52 +1,109 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { ArrowDown, Heart } from "lucide-react";
 import NeuralCanvas from "../components/NeuralCanvas";
-import Button from "../components/Button";
-import Marquee from "../components/Marquee";
-import { SplitText } from "../components/Reveal";
-import useTypewriter from "../hooks/useTypewriter";
+import useLikes from "../hooks/useLikes";
 import { EASE, INTRO_DELAY } from "../lib/motion";
 
 const D = INTRO_DELAY;
+// TODO(Ramtej): save the background-removed photo as public/hero-cutout.png
+const HERO_CUTOUT = "/hero-cutout.png";
+const NAME_SIZE = "text-[23vw] lg:text-[clamp(8rem,17.5vw,16rem)]";
 
-const MARQUEE_ITEMS = ["Backend Systems", "LLM Pipelines", "Serverless on AWS", "Full-Stack Products", "AI Automation", "API Design", "Performance Engineering"];
+const BURST = Array.from({ length: 8 }, (_, i) => (i / 8) * Math.PI * 2);
 
-const HERO_STATS = [
-  { value: "3", label: "Internships" },
-  { value: "35+", label: "Projects shipped" },
-  { value: "10+", label: "Hackathon wins & mentoring" },
-];
+function HeartPill() {
+  const { count, liked, like } = useLikes();
+  const [bursts, setBursts] = useState([]);
 
-function RotatingBadge() {
-  const text = "AVAILABLE FOR WORK • OPEN TO FREELANCE • ";
+  const onLike = () => {
+    if (liked) return;
+    const id = Date.now();
+    setBursts((b) => [...b, id]);
+    setTimeout(() => setBursts((b) => b.filter((x) => x !== id)), 900);
+    like();
+  };
+
   return (
-    <div className="relative h-32 w-32 sm:h-36 sm:w-36">
-      <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full animate-spin-slow">
-        <defs>
-          <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-        </defs>
-        <text className="fill-snow" style={{ fontSize: 15.5, letterSpacing: 3.2, fontFamily: "var(--font-mono)" }}>
-          <textPath href="#badge-circle">{text}</textPath>
-        </text>
-      </svg>
-      <div className="absolute inset-[26%] flex items-center justify-center rounded-full bg-cobalt text-snow shadow-[0_0_40px_rgba(59,130,246,0.55)]">
-        <ArrowUpRight size={26} />
-      </div>
-    </div>
+    <motion.button
+      type="button"
+      onClick={onLike}
+      whileTap={liked ? undefined : { scale: 0.92 }}
+      aria-label={liked ? "You liked this portfolio" : "Like this portfolio"}
+      aria-pressed={liked}
+      className={`glass relative inline-flex items-center gap-2.5 rounded-full py-2 pl-2.5 pr-4 transition-colors ${
+        liked ? "" : "hover:border-rose-400/40"
+      }`}
+    >
+      <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-white/[0.06]">
+        <motion.span key={liked ? "on" : "off"} initial={liked ? { scale: 0.3 } : false} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 500, damping: 12 }} className="flex">
+          <Heart size={14} className={liked ? "fill-rose-500 text-rose-500" : "text-mist"} />
+        </motion.span>
+        <AnimatePresence>
+          {bursts.map((id) =>
+            BURST.map((angle, i) => (
+              <motion.span
+                key={`${id}-${i}`}
+                className="pointer-events-none absolute text-rose-400"
+                initial={{ x: 0, y: 0, scale: 0.4, opacity: 1 }}
+                animate={{ x: Math.cos(angle) * 26, y: Math.sin(angle) * 26, scale: 1, opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <Heart size={8} className="fill-current" />
+              </motion.span>
+            ))
+          )}
+        </AnimatePresence>
+      </span>
+      <span className="font-mono text-xs text-mist">
+        <span className="tabular-nums text-snow">{count == null ? "—" : count.toLocaleString()}</span>{" "}
+        {liked ? "thanks ♡" : "like this?"}
+      </span>
+    </motion.button>
+  );
+}
+
+// One line of the name, sliding up out of a mask on load.
+function NameLine({ children, delay, className = "" }) {
+  return (
+    <span className="block overflow-hidden pb-[0.04em]">
+      <motion.span
+        className={`block ${className}`}
+        initial={{ y: "105%" }}
+        animate={{ y: 0 }}
+        transition={{ delay: D + delay, duration: 1.1, ease: EASE }}
+      >
+        {children}
+      </motion.span>
+    </span>
   );
 }
 
 export default function Hero({ onNav }) {
   const ref = useRef(null);
   const [exploded, setExploded] = useState(false);
-  const typewriter = useTypewriter();
 
+  // Scroll: the two name lines drift apart, the portrait settles back.
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const portraitY = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
-  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const firstX = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
+  const lastX = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.86]);
+  const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+
+  // Pointer: subtle depth, name and portrait move in opposite directions.
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 80, damping: 20 });
+  const sy = useSpring(py, { stiffness: 80, damping: 20 });
+  const nameShiftX = useTransform(sx, (v) => v * -14);
+  const photoShiftX = useTransform(sx, (v) => v * 10);
+  const photoShiftY = useTransform(sy, (v) => v * 8);
+
+  const onPointerMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
 
   useEffect(() => {
     const hero = ref.current;
@@ -57,142 +114,84 @@ export default function Hero({ onNav }) {
   }, []);
 
   return (
-    <section id="Home" ref={ref} className="relative flex min-h-[100svh] flex-col overflow-hidden">
-      <div className="absolute inset-0 opacity-70">
+    <section
+      id="Home"
+      ref={ref}
+      onPointerMove={onPointerMove}
+      className="relative flex min-h-[100svh] flex-col overflow-hidden"
+    >
+      <div className="absolute inset-0 opacity-40">
         <NeuralCanvas explode={exploded} />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_70%_40%,rgba(29,78,216,0.28),transparent_70%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ink to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_45%_55%_at_50%_50%,rgba(29,78,216,0.32),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pt-32 pb-16 sm:px-8">
-        <div className="grid w-full items-center gap-14 lg:grid-cols-[1.4fr_1fr]">
-          <motion.div style={{ y: contentY, opacity: contentOpacity }}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: D, duration: 0.8, ease: EASE }}
-              className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-2 pr-4 backdrop-blur"
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-azure opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-azure" />
-              </span>
-              <span className="font-mono text-xs tracking-wide text-mist">Available for new projects · 2026</span>
-            </motion.div>
+      <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pb-8 pt-28 sm:px-8">
+        {/* Name */}
+        <div className="relative flex flex-1 items-center justify-center">
+          <h1 className={`relative w-full select-none font-display ${NAME_SIZE} font-bold uppercase leading-[0.8] tracking-[-0.035em]`} aria-label="Vigna Ramtej">
+            <motion.span style={{ x: firstX }} className="relative z-0 block">
+              <motion.span style={{ x: nameShiftX }} className="block">
+                <NameLine delay={0.1} className="text-snow">
+                  Vigna
+                </NameLine>
+              </motion.span>
+            </motion.span>
+            <motion.span style={{ x: lastX }} className="relative z-20 block text-right">
+              <motion.span style={{ x: nameShiftX }} className="block">
+                <NameLine delay={0.25} className="text-veil">
+                  Ramtej
+                </NameLine>
+              </motion.span>
+            </motion.span>
+          </h1>
+        </div>
 
-            <h1 className="font-display text-[clamp(2.7rem,5.8vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-snow">
-              <SplitText text="Hi, I'm Ramtej." animateOnMount delay={D + 0.1} />
-              <br />
-              <SplitText text="I build" animateOnMount delay={D + 0.3} />{" "}
-              <SplitText text="fast, reliable" animateOnMount delay={D + 0.42} wordClassName="serif-accent text-gradient pr-[0.06em]" />{" "}
-              <SplitText text="products that scale." animateOnMount delay={D + 0.55} />
-            </h1>
+        {/* Cut-out portrait rises from the bottom edge, between the solid first name and the see-through last name */}
+        <motion.div
+          style={{ scale: photoScale, x: photoShiftX, y: photoShiftY }}
+          className="pointer-events-none absolute -bottom-8 left-1/2 z-10 -translate-x-1/2 origin-bottom lg:left-[72%]"
+        >
+          <motion.img
+            src={HERO_CUTOUT}
+            alt="Vigna Ramtej"
+            draggable={false}
+            onError={(e) => (e.currentTarget.style.display = "none")}
+            initial={{ opacity: 0, y: 80, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ delay: D + 0.35, duration: 1.4, ease: EASE }}
+            className="h-[58svh] w-auto max-w-none object-contain drop-shadow-[0_0_60px_rgba(59,130,246,0.35)] sm:h-[66svh] lg:h-[min(80svh,820px)]"
+          />
+        </motion.div>
+        <div className="pointer-events-none absolute -bottom-8 left-1/2 z-[15] h-40 w-screen -translate-x-1/2 bg-gradient-to-t from-ink via-ink/70 to-transparent" />
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: D + 1, duration: 0.8 }}
-              className="mt-8 flex items-center gap-3 font-mono text-sm sm:text-base"
-            >
-              <span className="text-slate">~/role</span>
-              <span className="text-sky">{typewriter}</span>
-              <span className="-ml-2 h-5 w-[2px] bg-azure animate-blink" />
-            </motion.div>
+        {/* Footer row */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: D + 1.1, duration: 0.8, ease: EASE }}
+          className="relative z-30 mt-8 flex flex-col items-center gap-5 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <div className="text-center sm:text-left">
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-sky">Full-stack &amp; Backend Engineer</p>
+            <p className="mt-1.5 text-sm text-mist">Based in Visakhapatnam, India</p>
+          </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: D + 1.1, duration: 0.8, ease: EASE }}
-              className="mt-6 max-w-xl text-base leading-relaxed text-mist sm:text-lg"
-            >
-              Full-stack engineer who owns features end to end, from Django and PostgreSQL backends and
-              LLM pipelines to serverless AWS and polished Next.js products.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: D + 1.25, duration: 0.8, ease: EASE }}
-              className="mt-10 flex flex-wrap items-center gap-4"
-            >
-              <Button onClick={() => onNav("Projects")}>View my work</Button>
-              <Button variant="ghost" onClick={() => onNav("Contact")} icon={<Mail size={15} />}>
-                Get in touch
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            style={{ y: portraitY, scale: portraitScale }}
-            initial={{ opacity: 0, scale: 0.92, filter: "blur(12px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ delay: D + 0.4, duration: 1.2, ease: EASE }}
-            className="relative mx-auto hidden w-full max-w-[400px] lg:block"
+          <button
+            type="button"
+            onClick={() => onNav("About")}
+            className="hidden flex-col items-center gap-2 text-slate transition-colors hover:text-snow md:flex"
+            aria-label="Scroll to About"
           >
-            <div className="absolute -inset-10 rounded-full bg-cobalt/30 blur-[90px]" />
-            <div className="spotlight relative aspect-[4/5] overflow-hidden rounded-[2rem] glass p-2">
-              <div className="relative h-full w-full overflow-hidden rounded-[1.6rem]">
-                <img src="/hero.webp" alt="Vigna Ramtej" className="h-full w-full object-cover grayscale-[35%] contrast-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-cobalt/20 mix-blend-multiply" />
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-sky">Based in</p>
-                  <p className="font-display text-xl font-semibold text-snow">Visakhapatnam, India</p>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -top-12 -left-14">
-              <RotatingBadge />
-            </div>
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="glass absolute -right-8 bottom-28 rounded-2xl px-4 py-3"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate">Latency cut</p>
-              <p className="font-display text-2xl font-semibold text-snow">
-                -61<span className="text-azure">%</span>
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+            <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity }} className="text-sky">
+              <ArrowDown size={15} />
+            </motion.span>
+          </button>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: D + 1.4, duration: 1 }}
-        className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8"
-      >
-        <div className="grid grid-cols-3 gap-4 border-t border-white/10 py-6">
-          {HERO_STATS.map((s) => (
-            <div key={s.label}>
-              <p className="font-display text-2xl font-semibold text-snow sm:text-4xl">{s.value}</p>
-              <p className="mt-1 text-xs text-slate sm:text-sm">{s.label}</p>
-            </div>
-          ))}
-        </div>
+          <HeartPill />
+        </motion.div>
       </motion.div>
-
-      <div className="relative z-10 border-y border-white/5 bg-night/60 py-5 backdrop-blur">
-        <Marquee
-          items={MARQUEE_ITEMS.map((m) => (
-            <span key={m} className="font-display text-2xl font-medium tracking-tight text-snow/80 sm:text-3xl">
-              {m}
-            </span>
-          ))}
-        />
-      </div>
-
-      <button
-        onClick={() => onNav("About")}
-        className="absolute bottom-28 right-8 z-10 hidden flex-col items-center gap-3 xl:flex"
-        aria-label="Scroll to About"
-      >
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate [writing-mode:vertical-rl]">Scroll</span>
-        <motion.span animate={{ y: [0, 8, 0] }} transition={{ duration: 1.8, repeat: Infinity }} className="text-sky">
-          <ArrowDown size={16} />
-        </motion.span>
-      </button>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api } from "../lib/api";
 
 export default function useVisitorPosition() {
   const [position, setPosition] = useState(null);
@@ -9,17 +10,7 @@ export default function useVisitorPosition() {
 
     const load = async () => {
       try {
-        const apiBase = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_BACKEND_PROXY_TARGET || "/api";
-        const response = await fetch(`${apiBase}/visitor`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          throw new Error(`Visitor API failed with status ${response.status}`);
-        }
-
-        const payload = await response.json();
+        const payload = await api("/visitor");
         const value = Number(payload?.position);
         if (!Number.isFinite(value) || value <= 0) {
           throw new Error("Visitor API response did not include a valid position");

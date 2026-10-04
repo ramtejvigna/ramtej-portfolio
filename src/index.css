@@ -94,6 +94,15 @@ body {
   color: transparent;
 }
 
+/* Glassy letters that fade out toward the bottom, so whatever sits behind shows through.
+   (A text-stroke outline would expose the overlapping contours of the variable font.) */
+.text-veil {
+  background: linear-gradient(180deg, rgba(245, 247, 255, 0.95) 0%, rgba(147, 180, 255, 0.55) 55%, rgba(59, 130, 246, 0.12) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .serif-accent {
   font-family: var(--font-serif);
   font-style: italic;
