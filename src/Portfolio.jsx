@@ -23,6 +23,7 @@ export default function Portfolio() {
   return (
     <div className="relative min-h-screen bg-ink text-snow">
       <SmoothScroll />
+      <Preloader />
 
       <Cursor />
       <Background />
