@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_BACKEND_PROXY_TARGET || "/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
 // JSON fetch against the portfolio backend; cookies are sent so the server can dedupe visitors/likes.
 export async function api(path, options = {}) {
