@@ -4,7 +4,7 @@
 export const YOUTUBE = {
   name: "TechThrive",
   handle: "@techthrive",
-  url: "https://youtube.com/@techthrive",
+  url: "https://www.youtube.com/@techthrive-46",
   subscribers: "1K+",
   niche: "Telugu Tech",
   videos: [
