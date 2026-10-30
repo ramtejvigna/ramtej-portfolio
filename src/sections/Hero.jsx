@@ -6,7 +6,8 @@ import useLikes from "../hooks/useLikes";
 import { EASE, INTRO_DELAY } from "../lib/motion";
 
 const D = INTRO_DELAY;
-const HERO_POSE = "/ram-pose.webp";
+const RECLINE_POSE = "/ram-pose.webp";
+const MEDITATION_POSE = "/meditation-pose.webp";
 const NAME_SIZE = "text-[23vw] lg:text-[clamp(8rem,17.5vw,16rem)]";
 
 const BURST = Array.from({ length: 8 }, (_, i) => (i / 8) * Math.PI * 2);
@@ -78,6 +79,21 @@ function NameLine({ children, delay, className = "" }) {
   );
 }
 
+// Illustrated pose placed around the name, settling in after the name lines land.
+function Pose({ delay, className = "", ...props }) {
+  return (
+    <motion.img
+      draggable={false}
+      onError={(e) => (e.currentTarget.style.display = "none")}
+      initial={{ opacity: 0, y: "-18%" }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: D + delay, duration: 0.9, ease: EASE }}
+      className={`pointer-events-none absolute ${className}`}
+      {...props}
+    />
+  );
+}
+
 export default function Hero({ onNav }) {
   const ref = useRef(null);
   const [exploded, setExploded] = useState(false);
@@ -133,18 +149,24 @@ export default function Hero({ onNav }) {
             <motion.span style={{ x: lastX }} className="relative z-20 block text-right">
               <motion.span style={{ x: nameShiftX }} className="relative block">
                 {/* Lies in the gap after the first name, resting on the last name */}
-                <motion.img
-                  src={HERO_POSE}
+                <Pose
+                  src={RECLINE_POSE}
                   alt="Illustration of Vigna Ramtej reclining"
                   width={1100}
                   height={437}
                   fetchPriority="high"
-                  draggable={false}
-                  onError={(e) => (e.currentTarget.style.display = "none")}
-                  initial={{ opacity: 0, y: "-18%" }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: D + 0.7, duration: 0.9, ease: EASE }}
-                  className="pointer-events-none absolute bottom-[calc(100%+0.05em)] right-0 w-[0.95em] lg:right-[0.22em] lg:w-[1.34em]"
+                  delay={0.7}
+                  className="bottom-[calc(100%+0.05em)] right-0 w-[0.95em] lg:right-[0.22em] lg:w-[1.34em]"
+                />
+                {/* Sits to the left of the last name; there is no gap there below lg */}
+                <Pose
+                  src={MEDITATION_POSE}
+                  alt="Illustration of Vigna Ramtej meditating"
+                  width={704}
+                  height={702}
+                  loading="lazy"
+                  delay={0.85}
+                  className="bottom-[0.07em] right-[3.86em] hidden w-[0.72em] lg:block"
                 />
                 <NameLine delay={0.25} className="text-veil">
                   Ramtej
