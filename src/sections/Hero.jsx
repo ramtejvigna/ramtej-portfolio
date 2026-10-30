@@ -6,7 +6,7 @@ import useLikes from "../hooks/useLikes";
 import { EASE, INTRO_DELAY } from "../lib/motion";
 
 const D = INTRO_DELAY;
-const HERO_CUTOUT = "/hero-cutout.webp";
+const HERO_POSE = "/ram-pose.webp";
 const NAME_SIZE = "text-[23vw] lg:text-[clamp(8rem,17.5vw,16rem)]";
 
 const BURST = Array.from({ length: 8 }, (_, i) => (i / 8) * Math.PI * 2);
@@ -82,26 +82,20 @@ export default function Hero({ onNav }) {
   const ref = useRef(null);
   const [exploded, setExploded] = useState(false);
 
-  // Scroll: the two name lines drift apart, the portrait settles back.
+  // Scroll: the two name lines drift apart.
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const firstX = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
   const lastX = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
-  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.86]);
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
-  // Pointer: subtle depth, name and portrait move in opposite directions.
+  // Pointer: subtle depth on the name.
   const px = useMotionValue(0);
-  const py = useMotionValue(0);
   const sx = useSpring(px, { stiffness: 80, damping: 20 });
-  const sy = useSpring(py, { stiffness: 80, damping: 20 });
   const nameShiftX = useTransform(sx, (v) => v * -14);
-  const photoShiftX = useTransform(sx, (v) => v * 10);
-  const photoShiftY = useTransform(sy, (v) => v * 8);
 
   const onPointerMove = (e) => {
     const r = e.currentTarget.getBoundingClientRect();
     px.set((e.clientX - r.left) / r.width - 0.5);
-    py.set((e.clientY - r.top) / r.height - 0.5);
   };
 
   useEffect(() => {
@@ -137,7 +131,21 @@ export default function Hero({ onNav }) {
               </motion.span>
             </motion.span>{" "}
             <motion.span style={{ x: lastX }} className="relative z-20 block text-right">
-              <motion.span style={{ x: nameShiftX }} className="block">
+              <motion.span style={{ x: nameShiftX }} className="relative block">
+                {/* Lies in the gap after the first name, resting on the last name */}
+                <motion.img
+                  src={HERO_POSE}
+                  alt="Illustration of Vigna Ramtej reclining"
+                  width={1100}
+                  height={437}
+                  fetchPriority="high"
+                  draggable={false}
+                  onError={(e) => (e.currentTarget.style.display = "none")}
+                  initial={{ opacity: 0, y: "-18%" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: D + 0.7, duration: 0.9, ease: EASE }}
+                  className="pointer-events-none absolute bottom-[calc(100%+0.05em)] right-0 w-[0.95em] lg:right-[0.22em] lg:w-[1.34em]"
+                />
                 <NameLine delay={0.25} className="text-veil">
                   Ramtej
                 </NameLine>
@@ -146,25 +154,6 @@ export default function Hero({ onNav }) {
           </h1>
         </div>
 
-        {/* Cut-out portrait rises from the bottom edge, between the solid first name and the see-through last name */}
-        <motion.div
-          style={{ scale: photoScale, x: photoShiftX, y: photoShiftY }}
-          className="pointer-events-none absolute -bottom-8 left-1/2 z-10 -translate-x-1/2 origin-bottom lg:left-[72%]"
-        >
-          <motion.img
-            src={HERO_CUTOUT}
-            alt="Vigna Ramtej"
-            width={537}
-            height={464}
-            fetchPriority="high"
-            draggable={false}
-            onError={(e) => (e.currentTarget.style.display = "none")}
-            initial={{ opacity: 0, y: 80, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: D + 0.35, duration: 1.4, ease: EASE }}
-            className="h-[58svh] w-auto max-w-none object-contain drop-shadow-[0_0_60px_rgba(59,130,246,0.35)] sm:h-[66svh] lg:h-[min(80svh,820px)]"
-          />
-        </motion.div>
         <div className="pointer-events-none absolute -bottom-8 left-1/2 z-[15] h-40 w-screen -translate-x-1/2 bg-gradient-to-t from-ink via-ink/70 to-transparent" />
 
         {/* Footer row */}
