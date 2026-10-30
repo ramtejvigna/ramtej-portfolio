@@ -47,6 +47,7 @@ export default function Preloader() {
       {!done && (
         <motion.div
           key="preloader"
+          aria-hidden
           className="fixed inset-0 z-[200] flex flex-col justify-between bg-ink px-6 py-8 sm:px-12 sm:py-10"
           exit={{ y: "-100%" }}
           transition={{ duration: 0.9, ease: EASE }}

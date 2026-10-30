@@ -10,13 +10,13 @@
   --color-sky: #93b4ff;        /* soft highlight */
   --color-snow: #f5f7ff;       /* white */
   --color-mist: #9aa6c4;       /* body copy */
-  --color-slate: #5b6687;      /* muted copy */
+  --color-slate: #6e7a9c;      /* muted copy; lightest shade of the old #5b6687 that passes 4.5:1 on ink */
   --color-line: rgba(147, 180, 255, 0.12);
 
-  --font-display: "Inter Tight", system-ui, sans-serif;
+  --font-display: "Inter Tight Variable", system-ui, sans-serif;
   --font-serif: "Instrument Serif", Georgia, serif;
-  --font-body: "Manrope", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-body: "Manrope Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 }

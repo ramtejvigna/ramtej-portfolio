@@ -1,0 +1,31 @@
+# Vigna Ramtej
+
+> Vigna Ramtej Telagarapu is a Full-Stack & Backend Engineer based in Visakhapatnam, Andhra Pradesh, India. He builds Django backends, AWS serverless systems and LLM pipelines, and is currently a Backend & Automation Engineer at CoComply AI. Open to full-time roles, freelance projects and collaborations.
+
+## Experience
+
+- CoComply AI — Backend & Automation Engineer (Mar 2026 – present): Django + PostgreSQL backend, Regulatory Intelligence LLM pipeline, internal GTM platform (Next.js, TypeScript, 130+ API routes) on AWS Amplify, queue + Python worker system for async LLM jobs.
+- Secure Blink — Backend Developer Intern (Aug 2025 – Dec 2025): monolith to AWS Lambda migration (cold start 2.3s → 890ms, 61% lower), RBAC across 15+ API endpoints, static analysis engine for OWASP Top 10.
+- Labfox.Studio — Full Stack Developer Intern (Mar 2025 – May 2025).
+
+## Education
+
+- B.Tech in Artificial Intelligence & Data Science, Sagi Ramakrishnam Raju Engineering College (2022–2026), CGPA 8.58.
+
+## Projects
+
+- [Code Battle Ground](https://github.com/ramtejvigna/CodeBattleGround): competitive programming arena
+- [Vedic Baby Names](https://github.com/ramtejvigna/CRM-vedic): CRM automation
+- [AMILE](https://github.com/ramtejvigna/AMILE): career development & talent networking
+- [Multimodal Sentiment Analyzer](https://github.com/ramtejvigna/multimodel-sentiment/tree/v2): deep learning emotion recognition
+- [Rydvu (freelance)](https://rydvu.com): ride-hailing platform
+- [Kriha Ethnics (freelance)](https://krihaethnics.com): ethnic wear storefront
+
+## Links
+
+- [Portfolio](https://ramtej-portfolio.pages.dev/)
+- [GitHub](https://github.com/ramtejvigna)
+- [LinkedIn](https://www.linkedin.com/in/vignaramtej)
+- [LeetCode](https://leetcode.com/u/ramtejvigna)
+- [YouTube (TechThrive, Telugu tech education)](https://www.youtube.com/@techthrive-46)
+- [Email](mailto:vignaramtej46@gmail.com)

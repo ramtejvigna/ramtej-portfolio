@@ -6,8 +6,7 @@ import useLikes from "../hooks/useLikes";
 import { EASE, INTRO_DELAY } from "../lib/motion";
 
 const D = INTRO_DELAY;
-// TODO(Ramtej): save the background-removed photo as public/hero-cutout.png
-const HERO_CUTOUT = "/hero-cutout.png";
+const HERO_CUTOUT = "/hero-cutout.webp";
 const NAME_SIZE = "text-[23vw] lg:text-[clamp(8rem,17.5vw,16rem)]";
 
 const BURST = Array.from({ length: 8 }, (_, i) => (i / 8) * Math.PI * 2);
@@ -136,7 +135,7 @@ export default function Hero({ onNav }) {
                   Vigna
                 </NameLine>
               </motion.span>
-            </motion.span>
+            </motion.span>{" "}
             <motion.span style={{ x: lastX }} className="relative z-20 block text-right">
               <motion.span style={{ x: nameShiftX }} className="block">
                 <NameLine delay={0.25} className="text-veil">
@@ -155,6 +154,9 @@ export default function Hero({ onNav }) {
           <motion.img
             src={HERO_CUTOUT}
             alt="Vigna Ramtej"
+            width={537}
+            height={464}
+            fetchPriority="high"
             draggable={false}
             onError={(e) => (e.currentTarget.style.display = "none")}
             initial={{ opacity: 0, y: 80, filter: "blur(10px)" }}

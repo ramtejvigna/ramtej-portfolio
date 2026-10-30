@@ -201,6 +201,39 @@ function ExperienceDetail({ exp, onBack }) {
   );
 }
 
+// Text index of every tab. The workspace UI only mounts one tab at a time, so this keeps the
+// experience and freelance content in the page for screen readers and the prerendered HTML.
+function WorkIndex() {
+  return (
+    <div className="sr-only">
+      <h3>Experience</h3>
+      <ul>
+        {EXPERIENCES.map((e) => (
+          <li key={e.company}>
+            {e.role} at {e.company} ({e.period}). {e.bullets.join(". ")}.
+          </li>
+        ))}
+      </ul>
+      <h3>Freelance</h3>
+      <ul>
+        {FREELANCE.map((f) => (
+          <li key={f.slug}>
+            <a href={f.url}>{f.name}</a>: {f.subtitle}. {f.bullets.join(". ")}.
+          </li>
+        ))}
+      </ul>
+      <h3>Projects</h3>
+      <ul>
+        {PROJECTS.map((p) => (
+          <li key={p.slug}>
+            <a href={p.github}>{p.name}</a>: {p.subtitle}. {p.bullets.join(". ")}.
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function Work() {
   const [tab, setTab] = useState("projects");
   const [open, setOpen] = useState(null);
@@ -311,6 +344,7 @@ export default function Work() {
           </div>
         </div>
       </motion.div>
+      <WorkIndex />
     </Section>
   );
 }

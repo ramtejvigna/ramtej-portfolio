@@ -1,0 +1,11 @@
+/* TEAM */
+Developer: Vigna Ramtej Telagarapu
+Role: Full-Stack & Backend Engineer
+Location: Visakhapatnam, Andhra Pradesh, India
+Contact: vignaramtej46 [at] gmail.com
+GitHub: https://github.com/ramtejvigna
+LinkedIn: https://www.linkedin.com/in/vignaramtej
+
+/* SITE */
+Built with: React, Vite, Tailwind CSS, Framer Motion
+Hosted on: Cloudflare Pages

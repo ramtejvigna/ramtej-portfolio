@@ -25,9 +25,9 @@ export function SplitText({ text, className = "", wordClassName = "", delay = 0,
     : { whileInView: "show", viewport: { once: true, amount: 0.5 } };
 
   return (
-    <motion.span className={className} initial="hidden" {...trigger} aria-label={text}>
+    <motion.span className={className} initial="hidden" {...trigger}>
       {words.map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.1em] -mb-[0.1em]" aria-hidden>
+        <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.1em] -mb-[0.1em]">
           <motion.span
             className={`inline-block ${wordClassName}`}
             variants={{

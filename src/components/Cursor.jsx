@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function Cursor() {
-  const [enabled] = useState(() => window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+  const [enabled] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  );
   const [hovering, setHovering] = useState(false);
   const [pressed, setPressed] = useState(false);
 

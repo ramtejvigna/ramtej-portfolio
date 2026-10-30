@@ -23,8 +23,6 @@ export default function Portfolio() {
   return (
     <div className="relative min-h-screen bg-ink text-snow">
       <SmoothScroll />
-      <Preloader />
-
       <Cursor />
       <Background />
       <ScrollProgress />
@@ -43,6 +41,9 @@ export default function Portfolio() {
       <div className="relative z-10">
         <Footer onNav={scrollToId} />
       </div>
+
+      {/* A fixed overlay, so it sits last in the DOM: crawlers and the prerendered HTML lead with real content. */}
+      <Preloader />
     </div>
   );
 }

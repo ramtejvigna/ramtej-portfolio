@@ -30,7 +30,7 @@ export default function Contact() {
 
           <h2 className="font-display text-[clamp(2.8rem,8vw,7rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-snow">
             <SplitText text="Let's build" />
-            <br />
+            {" "}<br />
             <SplitText text="something great." wordClassName="serif-accent text-gradient pr-[0.06em]" delay={0.15} />
           </h2>
 

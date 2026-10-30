@@ -11,11 +11,20 @@ export default function NeuralCanvas({ explode }) {
     const sim = simRef.current;
 
     function resize() {
+      const wasEmpty = !canvas.width || !canvas.height;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      // Particles seeded while the canvas had no size all sit at 0,0; spread them out once it has one.
+      if (wasEmpty && canvas.width && canvas.height) {
+        for (const p of sim.particles) {
+          p.x = Math.random() * canvas.width;
+          p.y = Math.random() * canvas.height;
+        }
+      }
     }
     resize();
-    window.addEventListener("resize", resize);
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
 
     const count = window.innerWidth < 768 ? 60 : 110;
     sim.particles = Array.from({ length: count }, () => {
@@ -49,6 +58,11 @@ export default function NeuralCanvas({ explode }) {
 
     function draw() {
       const W = canvas.width, H = canvas.height;
+      // A zero-size canvas (hidden tab, collapsed pane) would make `% W` below NaN every particle for good.
+      if (!W || !H) {
+        sim.animId = requestAnimationFrame(draw);
+        return;
+      }
       ctx.clearRect(0, 0, W, H);
 
       const pts = sim.particles;
@@ -145,7 +159,7 @@ export default function NeuralCanvas({ explode }) {
 
     return () => {
       cancelAnimationFrame(sim.animId);
-      window.removeEventListener("resize", resize);
+      ro.disconnect();
     };
   }, []);
 

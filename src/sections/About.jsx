@@ -38,7 +38,7 @@ export default function About() {
           <div className="flex h-full flex-col justify-between gap-10">
             <div className="flex items-center gap-5">
               <div className="relative">
-                <img src="/DP.webp" alt="Vigna Ramtej" className="h-20 w-20 rounded-2xl object-cover ring-1 ring-white/15" />
+                <img src="/DP-160.webp" alt="Vigna Ramtej" width={80} height={80} loading="lazy" decoding="async" className="h-20 w-20 rounded-2xl object-cover ring-1 ring-white/15" />
                 <span className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-night bg-azure" />
               </div>
               <div>

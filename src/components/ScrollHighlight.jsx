@@ -2,11 +2,16 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 function Word({ children, progress, range }) {
-  const opacity = useTransform(progress, range, [0.14, 1]);
+  // 0.55 is the lowest start that keeps the dimmed words (including the sky accent) at 3:1 contrast.
+  const opacity = useTransform(progress, range, [0.55, 1]);
+  // The trailing space keeps the paragraph's text readable as a sentence (crawlers, copy-paste);
+  // whitespace between flex items isn't rendered, so the visual gap still comes from the margin.
   return (
-    <span className="relative mr-[0.25em] inline-block">
-      <motion.span style={{ opacity }}>{children}</motion.span>
-    </span>
+    <>
+      <span className="relative mr-[0.25em] inline-block">
+        <motion.span style={{ opacity }}>{children}</motion.span>
+      </span>{" "}
+    </>
   );
 }
 

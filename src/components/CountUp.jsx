@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 
 export default function CountUp({ target, suffix = "", decimals = 0 }) {
   const ref = useRef(null);
-  const [value, setValue] = useState(0);
+  // Render the real number first so prerendered HTML and crawlers see it, then count up from 0 in view.
+  const [value, setValue] = useState(target);
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
+    if (el.getBoundingClientRect().top > window.innerHeight) setValue(0);
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setStarted(true); },
       { threshold: 0.5 }

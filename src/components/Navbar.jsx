@@ -34,11 +34,11 @@ export default function Navbar({ activeSection, onNav }) {
             scrolled ? "glass" : "border border-transparent"
           }`}
         >
-          <button onClick={() => go("Home")} className="group flex items-center gap-2.5 pl-2" aria-label="Home">
-            <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-snow font-display text-sm font-bold text-ink transition-transform duration-500 group-hover:rotate-[360deg]">
+          <button onClick={() => go("Home")} className="group flex items-center gap-2.5 pl-2">
+            <span aria-hidden className="relative flex h-9 w-9 items-center justify-center rounded-full bg-snow font-display text-sm font-bold text-ink transition-transform duration-500 group-hover:rotate-[360deg]">
               VR
             </span>
-            <span className="hidden sm:block font-display text-sm font-semibold tracking-tight text-snow">
+            <span className="sr-only sm:not-sr-only font-display text-sm font-semibold tracking-tight text-snow">
               Vigna Ramtej<span className="text-azure">.</span>
             </span>
           </button>
